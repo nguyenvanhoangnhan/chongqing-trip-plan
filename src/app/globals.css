@@ -161,15 +161,13 @@ a {
   gap: 9px;
 }
 
-.currency-switcher,
-.map-provider-switcher {
+.currency-switcher {
   margin: 0 8px 0 0;
   padding: 0;
   border: 0;
 }
 
-.currency-switcher legend,
-.map-provider-switcher legend {
+.currency-switcher legend {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -180,8 +178,7 @@ a {
   border: 0;
 }
 
-.currency-switcher > div,
-.map-provider-switcher > div {
+.currency-switcher > div {
   height: 34px;
   padding: 3px;
   background: #26241f;
@@ -189,8 +186,7 @@ a {
   display: flex;
 }
 
-.currency-switcher label,
-.map-provider-switcher label {
+.currency-switcher label {
   position: relative;
   min-width: 42px;
   color: #bdb6a9;
@@ -202,23 +198,19 @@ a {
   place-items: center;
 }
 
-.currency-switcher input,
-.map-provider-switcher input {
+.currency-switcher input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
 .currency-switcher label:hover,
-.map-provider-switcher label:hover,
-.currency-switcher label[data-active="true"],
-.map-provider-switcher label[data-active="true"] {
+.currency-switcher label[data-active="true"] {
   color: var(--ink);
   background: var(--gold);
 }
 
-.currency-switcher label:has(input:focus-visible),
-.map-provider-switcher label:has(input:focus-visible) {
+.currency-switcher label:has(input:focus-visible) {
   outline: 2px solid var(--paper-bright);
   outline-offset: 2px;
 }
@@ -2499,8 +2491,7 @@ a {
     display: none;
   }
 
-  .currency-switcher,
-  .map-provider-switcher {
+  .currency-switcher {
     margin-right: 2px;
   }
 
@@ -2550,8 +2541,7 @@ a {
     font-size: 0;
   }
 
-  .currency-switcher label,
-  .map-provider-switcher label {
+  .currency-switcher label {
     min-width: 38px;
   }
 
@@ -3218,6 +3208,106 @@ a {
   background: var(--gold);
 }
 
+.map-provider-switcher {
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.map-provider-switcher legend {
+  margin-bottom: 10px;
+  padding: 0;
+  color: var(--chili);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.map-provider-switcher > div {
+  max-width: 560px;
+  padding: 4px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.map-provider-switcher label {
+  position: relative;
+  min-height: 56px;
+  padding: 10px 44px 10px 16px;
+  color: var(--paper);
+  background: var(--ink-soft);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.map-provider-switcher label strong {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.map-provider-switcher label span {
+  font-family: var(--serif);
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.map-provider-switcher input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map-provider-switcher label:hover {
+  background: #3a372f;
+}
+
+.map-provider-switcher label[data-active="true"],
+.map-provider-switcher label[data-active="true"]:hover {
+  color: var(--ink);
+  background: var(--gold);
+}
+
+.map-provider-switcher label[data-active="true"] span {
+  opacity: 0.9;
+}
+
+.map-provider-switcher__check {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  stroke-width: 3;
+}
+
+.map-provider-switcher label:has(input:focus-visible) {
+  outline: 3px solid var(--chili);
+  outline-offset: 2px;
+}
+
+.map-provider-switcher > p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
 .itinerary-day__title {
   min-width: 0;
   padding: 19px 0;
@@ -3720,6 +3810,14 @@ a {
   .itinerary-stop__time svg {
     display: none;
   }
+  .map-provider-switcher > div {
+    max-width: none;
+  }
+
+  .map-provider-switcher label {
+    min-height: 60px;
+  }
+
 
   .itinerary-stop__rail span {
     width: 24px;

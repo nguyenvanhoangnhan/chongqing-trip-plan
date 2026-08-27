@@ -80,6 +80,19 @@ describe("ItineraryBoard", () => {
     expect(firstDay?.open).toBe(true);
   });
 
+  test("lets the traveler pick the map right above the days", () => {
+    render(
+      <ItineraryBoard
+        itinerary={itineraryFixture()}
+        defaultOpenDayIds={["day-3"]}
+      />,
+    );
+
+    expect(screen.getByText("Mở bản đồ bằng")).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: /Baidu/ })).toBeChecked();
+    expect(screen.getByRole("radio", { name: /Amap/ })).not.toBeChecked();
+  });
+
   test("offers both car and public-transport Baidu routes", () => {
     render(
       <ItineraryBoard

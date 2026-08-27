@@ -8,6 +8,7 @@ import {
   TrainFront,
 } from "lucide-react";
 
+import { MapProviderSwitcher } from "@/components/itinerary/map-provider-switcher";
 import { PlaceChineseName } from "@/components/itinerary/place-chinese-name";
 import { PlaceLink } from "@/components/itinerary/place-link";
 import { PrintAllDays } from "@/components/itinerary/print-all-days";
@@ -82,6 +83,8 @@ export function ItineraryBoard({
             <p>Chạm vào tiêu đề ngày để thu gọn hoặc mở lại.</p>
           </div>
         </div>
+
+        <MapProviderSwitcher />
 
         <section className="itinerary-days" aria-label="Lịch trình năm ngày">
           {itinerary.days.map((day, dayIndex) => {
