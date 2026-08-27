@@ -1,6 +1,5 @@
 import {
   CalendarDays,
-  CarFront,
   ChevronDown,
   Clock3,
   ExternalLink,
@@ -13,8 +12,8 @@ import {
 import { PlaceChineseName } from "@/components/itinerary/place-chinese-name";
 import { PlaceLink } from "@/components/itinerary/place-link";
 import { PrintAllDays } from "@/components/itinerary/print-all-days";
+import { RouteLinks } from "@/components/itinerary/route-links";
 import type { Itinerary, ItineraryProgress } from "@/domain/itinerary";
-import { buildBaiduDirectionUrl } from "@/lib/baidu-maps";
 
 type ItineraryBoardProps = {
   itinerary: Itinerary;
@@ -186,36 +185,7 @@ export function ItineraryBoard({
                           </div>
                         )}
 
-                        {item.route && (
-                          <div
-                            className="itinerary-stop__directions"
-                            data-preferred={item.route.preferredMode}
-                          >
-                            <span>Chỉ đường Baidu</span>
-                            <a
-                              href={buildBaiduDirectionUrl({
-                                origin: item.route.origin,
-                                destination: item.route.destination,
-                                mode: "driving",
-                              })}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <CarFront size={15} aria-hidden="true" /> Ô tô
-                            </a>
-                            <a
-                              href={buildBaiduDirectionUrl({
-                                origin: item.route.origin,
-                                destination: item.route.destination,
-                                mode: "transit",
-                              })}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <TrainFront size={15} aria-hidden="true" /> Công cộng
-                            </a>
-                          </div>
-                        )}
+                        {item.route && <RouteLinks route={item.route} />}
                       </div>
                     </article>
                     );
@@ -229,9 +199,9 @@ export function ItineraryBoard({
         <aside className="itinerary-map-note">
           <CalendarDays size={20} aria-hidden="true" />
           <p>
-            <strong>Baidu Maps mở ở trang hoạch định tuyến đầy đủ.</strong>
+            <strong>Chỉ đường mở trang hoạch định tuyến của bản đồ đang chọn.</strong>
             Chọn Ô tô hoặc Công cộng tại đây, rồi vẫn có thể đổi phương tiện
-            trong Baidu Maps.
+            trong ứng dụng bản đồ.
           </p>
         </aside>
       </main>

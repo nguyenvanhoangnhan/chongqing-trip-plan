@@ -10,7 +10,7 @@ export const vi = {
     location: "Trùng Khánh · 重庆",
     titleLines: ["Trùng", "Khánh"],
     description:
-      "Lịch trình, chỉ đường Baidu Maps và danh sách quà của cả nhóm.",
+      "Lịch trình, chỉ đường Baidu hoặc Amap và danh sách quà của cả nhóm.",
     boardLabel: "PRIVATE TRIP BOARD",
     boardDate: "DAY 1 → DAY 5",
     giftMark: "行程",
