@@ -162,7 +162,7 @@ export const vi = {
     nearHotel: "Quanh khu trung tâm",
     inItinerary: "Trong lịch trình",
     travel: "Di chuyển",
-    travelTime: (min: number, max: number) => `${min}–${max} phút`,
+    travelTime: (min: number, max: number) => `${min}-${max} phút`,
     map: "Tìm trên bản đồ",
     copied: "Đã sao chép",
     copyFailed: "Không sao chép được",

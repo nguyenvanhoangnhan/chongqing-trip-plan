@@ -41,7 +41,7 @@ describe("GiftCard", () => {
     expect(screen.getByText(gift.packVi)).toBeInTheDocument();
     expect(screen.getByText(`¥${gift.priceCny.toFixed(2)}`)).toBeInTheDocument();
     expect(screen.getByText("≈ 45.625 ₫")).toBeInTheDocument();
-    expect(screen.queryByText(/–/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/\d+-\d+/)).not.toBeInTheDocument();
   });
 
   it("shows who already selected the gift", () => {

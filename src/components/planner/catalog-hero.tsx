@@ -38,7 +38,7 @@ export function CatalogHero({ catalog, currency }: CatalogHeroProps) {
             <div>
               <dt>{messages.catalogHero.perPerson}</dt>
               <dd>
-                {formatCnyInCurrency(minCny, currency, rates)}–
+                {formatCnyInCurrency(minCny, currency, rates)}-
                 {formatCnyInCurrency(maxCny, currency, rates)}
               </dd>
             </div>

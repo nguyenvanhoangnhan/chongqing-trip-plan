@@ -24,7 +24,7 @@ describe("LocationGuide", () => {
     ).toEqual([
       "Raffles City Trùng Khánh",
       "Hồng Nhai Động",
-      "Khu Giải Phóng Bi – Bát Nhất Lộ",
+      "Khu Giải Phóng Bi - Bát Nhất Lộ",
       "Công viên sáng tạo Nhị Xưởng",
       "Phố cổ Từ Khí Khẩu",
     ]);

@@ -17,7 +17,7 @@ export function formatCny(value: number): string {
 export function formatPriceRangeCny(min: number, max: number): string {
   return min === max
     ? formatCny(min)
-    : `${integerFormatter.format(min)}–${integerFormatter.format(max)} ¥`;
+    : `${integerFormatter.format(min)}-${integerFormatter.format(max)} ¥`;
 }
 
 export function formatCnyInCurrency(
