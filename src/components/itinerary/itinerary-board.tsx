@@ -2,7 +2,6 @@ import {
   CalendarDays,
   ChevronDown,
   Clock3,
-  ExternalLink,
   Footprints,
   MapPin,
   Route,

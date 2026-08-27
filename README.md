@@ -33,6 +33,32 @@ Fill the placeholders in `.env.local` before starting the app. Credentials,
 private itinerary data, generated exports, and image binaries are intentionally
 excluded from the repository.
 
+## Private itinerary
+
+The itinerary document lives only in Vercel Blob and never enters the
+repository. `pull` writes it to the ignored `tmp/`, and `push` refuses a
+document the audit rejects.
+
+```bash
+npm run itinerary:pull
+npm run itinerary:validate
+npm run itinerary:push tmp/itinerary.json
+```
+
+## Map links
+
+Neither Baidu nor Amap returns an error for a request it cannot serve: it
+redirects to its own home page, so a link that looks right in the markup can
+still be dead. This follows every link both maps can be given.
+
+```bash
+npm run maps:check
+```
+
+Links to `www.amap.com` are reported as unverifiable because that site draws
+its route in the browser, so an HTTP check cannot tell a real route from a
+blank map. Open those by hand.
+
 ## Quality checks
 
 ```bash
