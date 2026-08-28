@@ -45,6 +45,7 @@ export function TravelerOverview({
               key={person.id}
               className="traveler-card"
               data-active={activePersonId === person.id}
+              data-own={isCurrent}
               data-accent={person.accent}
               onClick={() => onSelectPerson(person.id)}
             >
