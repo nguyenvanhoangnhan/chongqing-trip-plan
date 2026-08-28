@@ -16,7 +16,8 @@
   --display: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
   --body: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
   --serif: "Iowan Old Style", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
-  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
+    "Liberation Mono", monospace;
   --shadow: 8px 8px 0 rgba(17, 16, 13, 0.14);
   --header-height: 76px;
 }
