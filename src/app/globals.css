@@ -4277,6 +4277,65 @@ a {
   color: var(--danger);
 }
 
+.settle-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  padding: 20px;
+  background: rgb(14 14 12 / 78%);
+  display: grid;
+  place-items: center;
+}
+
+.settle-dialog > div {
+  width: min(420px, 100%);
+  padding: 20px;
+  background: var(--paper-bright);
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 22%);
+}
+
+.settle-dialog h2 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.settle-dialog p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.settle-dialog__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.settle-dialog__actions button {
+  min-height: 50px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.settle-dialog__actions button[data-primary="true"] {
+  color: var(--paper-bright);
+  background: var(--ink);
+}
+
+.settle-dialog__actions button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 @media (max-width: 820px) {
   /* Phone: navigation lives in the bottom bar, so the header keeps only the
      brand and the account menu. */

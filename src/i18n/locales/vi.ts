@@ -176,6 +176,14 @@ export const vi = {
     owes: (from: string, to: string) => `${from} nợ ${to}`,
     settle: "Đã trả",
     paidTotal: "Đã chi",
+    settleConfirm: {
+      title: "Ghi khoản trả nợ",
+      question: (from: string, to: string, amount: string) =>
+        `${from} trả ${to} ${amount}?`,
+      cancel: "Huỷ",
+      confirm: "Ghi khoản",
+      saving: "Đang ghi…",
+    },
     form: {
       title: "Ghi khoản mới",
       amount: "Số tiền (¥)",
@@ -187,7 +195,6 @@ export const vi = {
       submit: "Lưu khoản",
       saving: "Đang lưu…",
       saved: "Đã ghi.",
-      settlementNote: "Trả nợ",
       invalidAmount: "Nhập số tiền lớn hơn 0, tối đa hai chữ số lẻ.",
       noParticipants: "Chọn ít nhất một người được trả.",
       error: "Không lưu được. Thử lại.",

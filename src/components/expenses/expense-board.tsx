@@ -11,6 +11,7 @@ import {
   type ExpenseFormStatus,
 } from "@/components/expenses/expense-form";
 import { ExpenseList } from "@/components/expenses/expense-list";
+import { SettleDialog } from "@/components/expenses/settle-dialog";
 import {
   calculateBalances,
   createSettlementDraft,
@@ -41,6 +42,9 @@ export function ExpenseBoard({
   );
   const [status, setStatus] = useState<ExpenseFormStatus>("idle");
   const [listError, setListError] = useState<string | null>(null);
+  const [pendingSettlement, setPendingSettlement] = useState<PairDebt | null>(
+    null,
+  );
   const currency = usePlannerStore((state) => state.currency);
 
   useEffect(() => {
@@ -79,20 +83,21 @@ export function ExpenseBoard({
     }
   }, []);
 
-  const settle = useCallback((debt: PairDebt) => {
-    const settlement = createSettlementDraft(debt.from, debt.to, debt.amountFen);
+  const confirmSettlement = useCallback(async () => {
+    if (!pendingSettlement) return;
 
-    setDraft({
-      amount: String(settlement.amountCny),
-      paidBy: settlement.paidBy,
-      participants: settlement.participants,
-      note: settlement.note,
-    });
-    setStatus("idle");
-    document
-      .getElementById("expense-form-anchor")
-      ?.scrollIntoView?.({ behavior: "smooth", block: "start" });
-  }, []);
+    const { from, to, amountFen } = pendingSettlement;
+    setStatus("saving");
+
+    try {
+      setStored(await addExpense(createSettlementDraft(from, to, amountFen)));
+      setPendingSettlement(null);
+      setStatus("saved");
+    } catch (error) {
+      console.error("Failed to record settlement", error);
+      setStatus("error");
+    }
+  }, [pendingSettlement]);
 
   return (
     <main className="expense-main" id="main-content">
@@ -109,16 +114,26 @@ export function ExpenseBoard({
         balances={balances}
         currency={currency}
         rates={rates}
-        onSettle={settle}
+        onSettle={setPendingSettlement}
       />
 
-      <div id="expense-form-anchor" />
       <ExpenseForm
         draft={draft}
         onDraftChange={setDraft}
         onSubmit={submit}
         status={status}
       />
+
+      {pendingSettlement && (
+        <SettleDialog
+          debt={pendingSettlement}
+          currency={currency}
+          rates={rates}
+          isSaving={status === "saving"}
+          onConfirm={() => void confirmSettlement()}
+          onCancel={() => setPendingSettlement(null)}
+        />
+      )}
 
       {listError && (
         <p className="expense-list__error" role="alert">

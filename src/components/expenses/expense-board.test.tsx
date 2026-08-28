@@ -80,20 +80,45 @@ describe("ExpenseBoard", () => {
     await waitFor(() => expect(screen.getByText("Lẩu")).toBeInTheDocument());
   });
 
-  it("prefills a settlement from a debt row", async () => {
+  it("asks before recording a settlement", async () => {
+    vi.mocked(addExpense).mockResolvedValue(ledgerWith([]));
     render(
       <ExpenseBoard currentPerson={nhan} rates={rates} initial={ledgerWith([hotpot])} />,
     );
 
     await userEvent.click(screen.getAllByRole("button", { name: "Đã trả" })[0]);
 
-    expect(screen.getByLabelText("Số tiền (¥)")).toHaveValue("30");
-    expect(screen.getByLabelText("Ghi chú")).toHaveValue("Trả nợ");
-    expect(
-      within(screen.getByRole("group", { name: "Ai trả" })).getByRole("button", {
-        name: "Duy",
-      }),
-    ).toHaveAttribute("aria-pressed", "true");
+    const dialog = screen.getByRole("dialog", { name: "Ghi khoản trả nợ" });
+    expect(within(dialog).getByText("Duy trả Nhân ¥30?")).toBeInTheDocument();
+    expect(addExpense).not.toHaveBeenCalled();
+
+    await userEvent.click(
+      within(dialog).getByRole("button", { name: "Ghi khoản" }),
+    );
+
+    expect(addExpense).toHaveBeenCalledWith({
+      paidBy: "duy",
+      participants: ["nhan"],
+      amountCny: 30,
+      note: "Trả nợ",
+    });
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("records nothing when the traveler backs out", async () => {
+    render(
+      <ExpenseBoard currentPerson={nhan} rates={rates} initial={ledgerWith([hotpot])} />,
+    );
+
+    await userEvent.click(screen.getAllByRole("button", { name: "Đã trả" })[0]);
+    await userEvent.click(
+      within(screen.getByRole("dialog")).getByRole("button", { name: "Huỷ" }),
+    );
+
+    expect(addExpense).not.toHaveBeenCalled();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("asks twice before deleting", async () => {
