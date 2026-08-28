@@ -51,7 +51,8 @@ export const ItineraryItemSchema = z.object({
 export const ItineraryDaySchema = z.object({
   id: ItineraryDayIdSchema,
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  headline: z.string().min(1),
+  // Decorative, so a document that forgets it must not take the page down.
+  headline: z.string().default(""),
   items: z.array(ItineraryItemSchema).min(1),
 });
 

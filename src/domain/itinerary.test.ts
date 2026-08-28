@@ -4,6 +4,7 @@ import {
   getChinaDateKey,
   getDefaultOpenDayIds,
   getItineraryProgress,
+  ItineraryDaySchema,
   ItineraryPlaceSchema,
   ItineraryRouteSchema,
   parseStopTime,
@@ -195,5 +196,17 @@ describe("itinerary progress", () => {
     expect(
       getItineraryProgress(new Date("2035-04-11T03:30:00Z"), days),
     ).toEqual({ currentItemId: "stop-2", nextItemId: "stop-3" });
+  });
+});
+
+describe("itinerary day schema", () => {
+  test("keeps a day whose headline was left out instead of failing the page", () => {
+    const day = ItineraryDaySchema.parse({
+      id: "day-1",
+      date: "2035-04-10",
+      items: [{ id: "day-1-stop-1", time: "08:00", activity: "Ăn sáng" }],
+    });
+
+    expect(day.headline).toBe("");
   });
 });

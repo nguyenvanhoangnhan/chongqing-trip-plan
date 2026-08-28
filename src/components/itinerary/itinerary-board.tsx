@@ -107,7 +107,7 @@ export function ItineraryBoard({
                   <span className="itinerary-day__title">
                     <small>{isCurrent ? "HÔM NAY · CHINA TIME" : dateLabel}</small>
                     <strong>Ngày {dayIndex + 1}</strong>
-                    <span>{day.headline}</span>
+                    {day.headline && <span>{day.headline}</span>}
                   </span>
                   <span className="itinerary-day__count">
                     {day.items.length} chặng
