@@ -7,6 +7,7 @@ import {
   type PersonSelection,
   type SelectionEntry,
 } from "@/domain/selections";
+import { toStrongEtag } from "@/server/blob/etag";
 
 type BlobReadResult = {
   statusCode: 200 | 304;
@@ -39,15 +40,6 @@ export type StoredSelection = {
 };
 
 const defaultBlobClient: BlobClient = { get, put };
-
-/**
- * Blobs large enough to be compressed on the way down (roughly 1KB and up)
- * arrive with a weak ETag, W/"hash". A conditional put only matches the strong
- * form, so the marker has to go before the ETag is handed back to the client.
- */
-function toStrongEtag(etag: string): string {
-  return etag.replace(/^W\//, "");
-}
 
 export function prepareSelectionUpdate(
   authenticatedPersonId: PersonId,
