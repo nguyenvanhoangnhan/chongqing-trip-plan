@@ -3963,19 +3963,30 @@ a {
     padding-bottom: 0;
   }
 
+  /* Phone: the trip tabs get their own full-width row under the brand, so
+     each one is a thumb-sized target with its label, not a lone 42px icon. */
   .app-header {
-    grid-template-columns: auto 1fr auto;
-    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    grid-template-columns: 1fr auto;
+    gap: 8px 12px;
   }
 
   .section-nav {
-    height: 36px;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    height: 48px;
   }
 
   .section-nav a {
-    min-width: 42px;
-    padding: 0 9px;
-    font-size: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    gap: 6px;
   }
 
   .section-nav a svg {
