@@ -157,7 +157,6 @@ export const vi = {
   },
   expenses: {
     tab: "Chia tiền",
-    kicker: "CHIA TIỀN · 分账",
     title: "Chia tiền",
     balancesTitle: "Còn nợ",
     settled: "Đã cân",
@@ -192,6 +191,9 @@ export const vi = {
       empty: "Chưa có khoản nào.",
       noNote: "Không ghi chú",
       paidFor: (payer: string, names: string) => `${payer} trả cho ${names}`,
+      settlementTag: "TRẢ NỢ",
+      settled: (payer: string, receiver: string) =>
+        `${payer} trả nợ cho ${receiver}`,
       each: (amount: string) => `mỗi người ${amount}`,
       remove: "Xoá",
       confirmRemove: "Xoá?",

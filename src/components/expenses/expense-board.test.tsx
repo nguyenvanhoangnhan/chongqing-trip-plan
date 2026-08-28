@@ -23,6 +23,7 @@ const hotpot: ExpenseEntry = {
   participants: ["duy", "nhan", "minh"],
   amountCny: 90,
   note: "Lẩu",
+  kind: "expense",
   createdBy: "nhan",
   createdAt: "2026-08-29T12:00:00.000Z",
 };
@@ -76,6 +77,7 @@ describe("ExpenseBoard", () => {
       participants: ["nhan", "minh"],
       amountCny: 90,
       note: "Lẩu",
+      kind: "expense",
     });
     await waitFor(() => expect(screen.getByText("Lẩu")).toBeInTheDocument());
   });
@@ -101,6 +103,7 @@ describe("ExpenseBoard", () => {
       participants: ["nhan"],
       amountCny: 30,
       note: "Trả nợ",
+      kind: "settlement",
     });
     await waitFor(() =>
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
@@ -119,6 +122,30 @@ describe("ExpenseBoard", () => {
 
     expect(addExpense).not.toHaveBeenCalled();
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("marks a settlement in the log", () => {
+    const settlement: ExpenseEntry = {
+      id: "22222222-2222-4222-8222-222222222222",
+      paidBy: "duy",
+      participants: ["nhan"],
+      amountCny: 30,
+      note: "Trả nợ",
+      kind: "settlement",
+      createdBy: "duy",
+      createdAt: "2026-08-29T13:00:00.000Z",
+    };
+    render(
+      <ExpenseBoard
+        currentPerson={nhan}
+        rates={rates}
+        initial={ledgerWith([hotpot, settlement])}
+      />,
+    );
+
+    expect(screen.getByText("TRẢ NỢ")).toBeInTheDocument();
+    expect(screen.getByText("Duy trả nợ cho Nhân")).toBeInTheDocument();
+    expect(screen.getByText("Nhân trả cho Duy, Nhân, Minh")).toBeInTheDocument();
   });
 
   it("asks twice before deleting", async () => {

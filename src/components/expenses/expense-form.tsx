@@ -88,6 +88,7 @@ export function ExpenseForm({
       participants,
       amountCny,
       note: draft.note.trim(),
+      kind: "expense",
     });
   };
 

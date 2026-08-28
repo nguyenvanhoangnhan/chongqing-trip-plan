@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Coins } from "lucide-react";
 
 import { BalanceSummary } from "@/components/expenses/balance-summary";
 import {
@@ -102,11 +101,8 @@ export function ExpenseBoard({
   return (
     <main className="expense-main" id="main-content">
       <div className="itinerary-heading">
-        <span className="trip-kicker">
-          <Coins size={15} aria-hidden="true" /> {messages.expenses.kicker}
-        </span>
         <div>
-          <h2>{messages.expenses.title}</h2>
+          <h1>{messages.expenses.title}</h1>
         </div>
       </div>
 

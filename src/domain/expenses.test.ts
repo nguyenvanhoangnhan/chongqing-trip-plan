@@ -16,6 +16,7 @@ function entry(
   return {
     id: "00000000-0000-4000-8000-000000000000",
     note: "",
+    kind: "expense",
     createdBy: overrides.paidBy,
     createdAt: "2026-08-29T10:00:00.000Z",
     ...overrides,
@@ -107,6 +108,7 @@ describe("createSettlementDraft", () => {
       participants: ["nhan"],
       amountCny: 45.5,
       note: "Trả nợ",
+      kind: "settlement",
     });
   });
 });

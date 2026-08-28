@@ -15,6 +15,7 @@ const entry: ExpenseEntry = {
   participants: ["duy", "nhan", "minh"],
   amountCny: 90,
   note: "Lẩu",
+  kind: "expense",
   createdBy: "nhan",
   createdAt: "2026-08-29T10:00:00.000Z",
 };

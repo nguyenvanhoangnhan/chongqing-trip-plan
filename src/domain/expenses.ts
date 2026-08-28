@@ -24,6 +24,8 @@ export const ExpenseInputSchema = z.object({
     .max(100_000)
     .refine(hasAtMostTwoDecimals, { message: "Tối đa hai chữ số lẻ" }),
   note: z.string().trim().max(120),
+  // Older entries predate the field, so they read as ordinary spending.
+  kind: z.enum(["expense", "settlement"]).default("expense"),
 });
 
 export const ExpenseEntrySchema = ExpenseInputSchema.extend({
@@ -135,5 +137,6 @@ export function createSettlementDraft(
     participants: [to],
     amountCny: amountFen / 100,
     note: "Trả nợ",
+    kind: "settlement",
   };
 }

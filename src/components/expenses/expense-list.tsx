@@ -88,12 +88,23 @@ export function ExpenseList({
             )
               .map((person) => person.displayName)
               .join(", ");
+            const isSettlement = entry.kind === "settlement";
 
             return (
               <li key={entry.id}>
                 <div className="expense-list__main">
-                  <strong>{entry.note || copy.noNote}</strong>
-                  <span>{copy.paidFor(nameOf(entry.paidBy), names)}</span>
+                  <strong>
+                    {isSettlement ? (
+                      <em className="expense-list__tag">{copy.settlementTag}</em>
+                    ) : (
+                      entry.note || copy.noNote
+                    )}
+                  </strong>
+                  <span>
+                    {isSettlement
+                      ? copy.settled(nameOf(entry.paidBy), names)
+                      : copy.paidFor(nameOf(entry.paidBy), names)}
+                  </span>
                   <small>
                     {timeFormatter.format(new Date(entry.createdAt))} ·{" "}
                     {entry.participants.length > 1

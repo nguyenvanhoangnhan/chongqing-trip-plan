@@ -4060,6 +4060,19 @@ a {
   font-weight: 800;
 }
 
+.expense-list__tag {
+  margin-right: 7px;
+  padding: 2px 5px;
+  color: var(--paper-bright);
+  background: var(--river);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.07em;
+  vertical-align: 2px;
+}
+
 .expense-list__main span,
 .expense-list__main small {
   color: var(--muted);
