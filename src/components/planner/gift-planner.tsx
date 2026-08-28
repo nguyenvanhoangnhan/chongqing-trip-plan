@@ -4,18 +4,23 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { RefreshCw } from "lucide-react";
 
 import { AppHeader } from "@/components/planner/app-header";
+import { CartFab } from "@/components/planner/cart-fab";
 import { CatalogViewToggle } from "@/components/planner/catalog-view-toggle";
+import { FullCartModal } from "@/components/planner/full-cart-modal";
 import { FilterPanel } from "@/components/planner/filter-panel";
 import { GiftGrid } from "@/components/planner/gift-grid";
 import { LocationGuide } from "@/components/planner/location-guide";
-import { MobileNav } from "@/components/planner/mobile-nav";
 import { PersonPlanner } from "@/components/planner/person-planner";
 import { TravelerOverview } from "@/components/planner/traveler-overview";
 import type { GiftCatalog } from "@/domain/gifts";
 import { messages } from "@/i18n";
 import { sortGifts } from "@/domain/gift-sort";
 import { PEOPLE, type Person, type PersonId } from "@/domain/people";
-import { createEmptySelection, type SelectionEntry } from "@/domain/selections";
+import {
+  calculateBudgetCny,
+  createEmptySelection,
+  type SelectionEntry,
+} from "@/domain/selections";
 import { useSelectionAutosave } from "@/hooks/use-selection-autosave";
 import { loadSelections } from "@/lib/selections-client";
 import type { StoredSelection } from "@/server/selections/service";
@@ -82,6 +87,7 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
   const [selections, setSelections] = useState(createInitialSelections);
   const [isLoading, setIsLoading] = useState(true);
   const [storageMessage, setStorageMessage] = useState<string | null>(null);
+  const [isOwnCartOpen, setIsOwnCartOpen] = useState(false);
   const {
     search,
     category,
@@ -89,11 +95,9 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
     nearRafflesOnly,
     sort,
     activePersonId,
-    mobileView,
     catalogView,
     currency,
     setActivePersonId,
-    setMobileView,
   } = usePlannerStore();
 
   const handleStoredSelection = useCallback(
@@ -289,10 +293,7 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
           currency={currency}
           currentPersonId={currentPerson.id}
           activePersonId={activePersonId}
-          onSelectPerson={(personId) => {
-            setActivePersonId(personId);
-            setMobileView("lists");
-          }}
+          onSelectPerson={setActivePersonId}
         />
 
         {(storageMessage || isLoading) && (
@@ -311,7 +312,6 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
           <section
             className="catalog-workspace"
             id="gift-catalog"
-            data-mobile-visible={mobileView === "catalog"}
           >
             <FilterPanel resultCount={filteredGifts.length} />
             <div className="catalog-results">
@@ -339,10 +339,7 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
             </div>
           </section>
 
-          <div
-            className="planner-sidebar"
-            data-mobile-visible={mobileView === "lists"}
-          >
+          <div className="planner-sidebar">
             <PersonPlanner
               activePersonId={activePersonId}
               currentPersonId={currentPerson.id}
@@ -359,9 +356,7 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
           </div>
         </div>
 
-        <div data-mobile-visible={mobileView === "locations"}>
-          <LocationGuide locations={catalog.locations} />
-        </div>
+        <LocationGuide locations={catalog.locations} />
 
         <footer className="page-footer">
           <span>{messages.catalog.footerBrand}</span>
@@ -374,7 +369,24 @@ export function GiftPlanner({ catalog, currentPerson }: GiftPlannerProps) {
           </p>
         </footer>
       </main>
-      <MobileNav />
+      <CartFab
+        count={ownEntries.length}
+        label={messages.planner.openFullCartLabel(currentPerson.displayName)}
+        onOpen={() => setIsOwnCartOpen(true)}
+      />
+      {isOwnCartOpen && (
+        <FullCartModal
+          personName={currentPerson.displayName}
+          entries={ownEntries}
+          giftById={giftById}
+          readOnly={false}
+          currency={currency}
+          exchangeRates={catalog.metadata.exchangeRates.rates}
+          totalCny={calculateBudgetCny(ownEntries)}
+          onChangeEntries={changeOwnEntries}
+          onClose={() => setIsOwnCartOpen(false)}
+        />
+      )}
     </div>
   );
 }

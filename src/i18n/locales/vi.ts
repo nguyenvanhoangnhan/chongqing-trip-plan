@@ -167,12 +167,6 @@ export const vi = {
     copied: "Đã sao chép",
     copyFailed: "Không sao chép được",
   },
-  mobileNav: {
-    label: "Điều hướng nhanh",
-    catalog: "Chọn quà",
-    lists: "Ba danh sách",
-    locations: "Điểm mua",
-  },
   expenses: {
     tab: "Chia tiền",
     kicker: "CHIA TIỀN · 分账",

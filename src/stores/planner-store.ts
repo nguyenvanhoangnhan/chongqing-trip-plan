@@ -6,7 +6,6 @@ import type { GiftSort } from "@/domain/gift-sort";
 import type { PersonId } from "@/domain/people";
 import type { DisplayCurrency } from "@/lib/format";
 
-export type MobileView = "catalog" | "lists" | "locations";
 export type CatalogView = "grid" | "list";
 
 type PlannerStore = {
@@ -16,7 +15,6 @@ type PlannerStore = {
   nearRafflesOnly: boolean;
   sort: GiftSort;
   activePersonId: PersonId;
-  mobileView: MobileView;
   catalogView: CatalogView;
   currency: DisplayCurrency;
   setSearch: (search: string) => void;
@@ -25,7 +23,6 @@ type PlannerStore = {
   setNearRafflesOnly: (nearRafflesOnly: boolean) => void;
   setSort: (sort: GiftSort) => void;
   setActivePersonId: (activePersonId: PersonId) => void;
-  setMobileView: (mobileView: MobileView) => void;
   setCatalogView: (catalogView: CatalogView) => void;
   setCurrency: (currency: DisplayCurrency) => void;
   resetFilters: () => void;
@@ -40,7 +37,6 @@ export const usePlannerStore = create<PlannerStore>()(
       nearRafflesOnly: false,
       sort: "default",
       activePersonId: "nhan",
-      mobileView: "catalog",
       catalogView: "grid",
       currency: "VND",
       setSearch: (search) => set({ search }),
@@ -49,7 +45,6 @@ export const usePlannerStore = create<PlannerStore>()(
       setNearRafflesOnly: (nearRafflesOnly) => set({ nearRafflesOnly }),
       setSort: (sort) => set({ sort }),
       setActivePersonId: (activePersonId) => set({ activePersonId }),
-      setMobileView: (mobileView) => set({ mobileView }),
       setCatalogView: (catalogView) => set({ catalogView }),
       setCurrency: (currency) => set({ currency }),
       resetFilters: () =>
