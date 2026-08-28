@@ -2829,10 +2829,8 @@ a {
   /* Phone: the traveler's own list takes the full width because it is the one
      they edit; the other two sit under it as short rows for glancing at. */
   .traveler-overview__grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 0 5px 8px 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
   }
 
   .traveler-card {
@@ -3998,6 +3996,10 @@ a {
   margin: 0 auto;
   padding: 44px 0 90px;
   display: grid;
+  /* minmax(0, 1fr), not the default auto: an auto track grows to the widest
+     field's intrinsic width and drags every block on the page past the
+     viewport with it. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 30px;
 }
 
@@ -4117,6 +4119,7 @@ a {
   background: var(--paper-bright);
   box-shadow: var(--shadow);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -4136,6 +4139,8 @@ a {
 }
 
 .expense-form input {
+  width: 100%;
+  min-width: 0;
   min-height: 52px;
   padding: 0 14px;
   border: 2px solid var(--ink);
@@ -4356,17 +4361,52 @@ a {
 
   .expense-balances li,
   .expense-list li {
-    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .expense-balances li strong,
+  .expense-list__main strong {
+    font-size: 14px;
   }
 
   .expense-balances li button,
   .expense-list__remove {
-    flex: 1 1 100%;
-    justify-content: center;
+    flex: 0 0 auto;
+    padding: 0 11px;
+    font-size: 10px;
   }
 
   .expense-balances__paid {
-    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .expense-balances__paid > div {
+    padding: 8px 9px;
+  }
+
+  .expense-balances__paid dt {
+    font-size: 9px;
+  }
+
+  .expense-balances__paid dd {
+    font-size: 14px;
+  }
+
+  .expense-list__amount {
+    font-size: 12px;
+  }
+
+  .expense-form {
+    padding: 14px;
+    gap: 13px;
+  }
+
+  .expense-form__amount input {
+    font-size: 24px;
+  }
+
+  .expense-form__people button {
+    font-size: 15px;
   }
 
   .itinerary-day__summary {

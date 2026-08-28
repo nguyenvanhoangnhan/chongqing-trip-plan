@@ -102,7 +102,6 @@ export function ExpenseBoard({
         </span>
         <div>
           <h2>{messages.expenses.title}</h2>
-          <p>{messages.expenses.subtitle}</p>
         </div>
       </div>
 

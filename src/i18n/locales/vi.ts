@@ -176,8 +176,7 @@ export const vi = {
   expenses: {
     tab: "Chia tiền",
     kicker: "CHIA TIỀN · 分账",
-    title: "Ai nợ ai",
-    subtitle: "Một người quét Alipay, những người còn lại ghi nợ ở đây.",
+    title: "Chia tiền",
     balancesTitle: "Còn nợ",
     settled: "Đã cân",
     owes: (from: string, to: string) => `${from} nợ ${to}`,
