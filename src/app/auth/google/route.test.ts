@@ -12,22 +12,11 @@ describe("Google sign-in transition route", () => {
     vi.mocked(signIn).mockReset();
   });
 
-  it("moves the renamed production domain to the registered OAuth domain", async () => {
-    const response = await GET(
-      new Request("https://chongqing-plan.vercel.app/auth/google"),
-    );
+  it("starts Google sign-in without leaving the current domain", async () => {
+    const response = await GET();
 
-    expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe(
-      "https://chongqing-gift-planner.vercel.app/auth/google",
-    );
-    expect(signIn).not.toHaveBeenCalled();
-  });
-
-  it("starts Google sign-in on an already registered origin", async () => {
-    const response = await GET(new Request("http://localhost:3010/auth/google"));
-
-    expect(signIn).toHaveBeenCalledWith("google", { redirectTo: "/" });
     expect(response.status).toBe(204);
+    expect(response.headers.get("location")).toBeNull();
+    expect(signIn).toHaveBeenCalledWith("google", { redirectTo: "/" });
   });
 });

@@ -1,22 +1,12 @@
 import { signIn } from "@/auth";
 
-const REGISTERED_PRODUCTION_HOST = "chongqing-gift-planner.vercel.app";
-const REGISTERED_PRODUCTION_ORIGIN =
-  `https://${REGISTERED_PRODUCTION_HOST}`;
-
-export async function GET(request: Request): Promise<Response> {
-  const requestUrl = new URL(request.url);
-  const needsRegisteredOrigin =
-    requestUrl.hostname.endsWith(".vercel.app") &&
-    requestUrl.hostname !== REGISTERED_PRODUCTION_HOST;
-
-  if (needsRegisteredOrigin) {
-    return Response.redirect(
-      `${REGISTERED_PRODUCTION_ORIGIN}/auth/google`,
-      307,
-    );
-  }
-
+/**
+ * Starts Google sign-in on the origin the traveler is already on, so the
+ * session lands on that same domain. Every production domain must be listed
+ * as an authorized redirect URI on the Google OAuth client:
+ *   https://<domain>/api/auth/callback/google
+ */
+export async function GET(): Promise<Response> {
   await signIn("google", { redirectTo: "/" });
 
   return new Response(null, { status: 204 });
