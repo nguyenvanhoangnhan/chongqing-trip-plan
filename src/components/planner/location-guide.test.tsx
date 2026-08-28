@@ -33,7 +33,6 @@ describe("LocationGuide", () => {
   it("presents each stop as a concise itinerary step", () => {
     render(<LocationGuide locations={giftCatalog.locations} />);
 
-    expect(screen.getByText("Theo thứ tự lịch trình.")).toBeInTheDocument();
     expect(screen.getByText("Quanh khu trung tâm")).toBeInTheDocument();
     expect(screen.getAllByText("Trong lịch trình")).toHaveLength(4);
     expect(screen.getAllByRole("article")).toHaveLength(5);

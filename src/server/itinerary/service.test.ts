@@ -5,13 +5,10 @@ import { BlobItineraryRepository } from "./service";
 function privateItineraryFixture({ legacy = false } = {}) {
   return {
     schemaVersion: 1,
-    title: "Private trip",
-    subtitle: "Five days",
     days: ["day-1", "day-2", "day-3", "day-4", "day-5"].map(
       (id, index) => ({
         id,
         date: `2035-04-${String(index + 10).padStart(2, "0")}`,
-        headline: `Route ${index + 1}`,
         items: [
           {
             id: `${id}-stop-1`,

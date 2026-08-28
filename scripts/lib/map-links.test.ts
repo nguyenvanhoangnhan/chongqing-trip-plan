@@ -99,12 +99,9 @@ describe("classifyMapLink", () => {
 describe("collectMapLinks", () => {
   const itinerary = {
     schemaVersion: 1 as const,
-    title: "Fictional trip",
-    subtitle: "Fictional subtitle",
     days: ["day-1", "day-2", "day-3", "day-4", "day-5"].map((id, index) => ({
       id: id as "day-1",
       date: `2035-04-1${index}`,
-      headline: `Route ${index + 1}`,
       items: [
         {
           id: `${id}-stop-1`,

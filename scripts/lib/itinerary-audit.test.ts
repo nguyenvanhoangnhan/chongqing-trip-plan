@@ -15,7 +15,6 @@ type AuditItem = {
 type AuditDay = {
   id: string;
   date: string;
-  headline: string;
   items: AuditItem[];
 };
 
@@ -24,7 +23,6 @@ function itinerary(overrides: Record<string, unknown> = {}) {
     (id, index) => ({
       id,
       date: `2035-04-1${index}`,
-      headline: `Route ${index + 1}`,
       items: [
         {
           id: `${id}-stop-1`,
@@ -38,8 +36,6 @@ function itinerary(overrides: Record<string, unknown> = {}) {
 
   return {
     schemaVersion: 1,
-    title: "Fictional trip",
-    subtitle: "Fictional subtitle",
     days,
     ...overrides,
   };

@@ -490,134 +490,6 @@ a {
   gap: 5px;
 }
 
-.catalog-hero {
-  position: relative;
-  min-height: 490px;
-  padding: 82px max(28px, calc((100vw - 1560px) / 2)) 54px;
-  overflow: hidden;
-  color: var(--paper-bright);
-  background: var(--ink);
-  border-bottom: 1px solid #4c473d;
-}
-
-.catalog-hero::after {
-  content: attr(data-city-mark);
-  position: absolute;
-  z-index: 0;
-  right: 4vw;
-  top: -68px;
-  color: transparent;
-  -webkit-text-stroke: 1px #484338;
-  font-family: var(--serif);
-  font-size: clamp(220px, 31vw, 500px);
-  line-height: 0.95;
-  writing-mode: vertical-rl;
-  pointer-events: none;
-}
-
-.catalog-hero > * {
-  position: relative;
-  z-index: 1;
-}
-
-.catalog-hero__eyebrow,
-.section-kicker {
-  color: var(--chili);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.catalog-hero__eyebrow {
-  width: fit-content;
-  margin-bottom: 44px;
-  padding: 7px 10px;
-  color: var(--paper-bright);
-  background: var(--chili);
-}
-
-.catalog-hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
-  gap: 70px;
-  align-items: end;
-}
-
-.catalog-hero__route {
-  margin: 0 0 10px;
-  color: #958e80;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.13em;
-}
-
-.catalog-hero h1,
-.login-poster h1 {
-  margin: 0;
-  font-family: var(--display);
-  font-size: clamp(48px, 6.7vw, 100px);
-  font-stretch: condensed;
-  font-weight: 900;
-  letter-spacing: -0.055em;
-  line-height: 0.88;
-  text-transform: uppercase;
-}
-
-.catalog-hero h1 em,
-.login-poster h1 em {
-  color: var(--chili);
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
-.catalog-hero__brief {
-  max-width: 470px;
-  padding: 22px 0 4px 24px;
-  border-left: 1px solid #5a554b;
-}
-
-.catalog-hero__brief > p {
-  margin: 0 0 26px;
-  color: #d4cdbf;
-  font-size: 16px;
-}
-
-.catalog-hero__brief dl {
-  margin: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.catalog-hero__brief dl div {
-  padding-top: 10px;
-  border-top: 1px solid #4d493f;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.catalog-hero__brief dt {
-  color: #948e81;
-  font-family: var(--mono);
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-.catalog-hero__brief dd {
-  margin: 0;
-  color: var(--paper-bright);
-  font-family: var(--display);
-  font-size: 16px;
-  font-weight: 800;
-}
-
 .hero-jump {
   position: absolute;
   left: max(28px, calc((100vw - 1560px) / 2));
@@ -2709,15 +2581,6 @@ a {
     margin-right: 2px;
   }
 
-  .catalog-hero {
-    min-height: 440px;
-    padding-top: 70px;
-  }
-
-  .catalog-hero__grid {
-    gap: 30px;
-  }
-
   .planner-layout {
     grid-template-columns: minmax(0, 1fr) 340px;
   }
@@ -2774,57 +2637,6 @@ a {
 
   .currency-switcher label {
     min-width: 38px;
-  }
-
-  .catalog-hero {
-    width: 100%;
-    max-width: 100vw;
-    min-height: auto;
-    padding: 55px 20px 50px;
-  }
-
-  .catalog-hero::after {
-    right: -24px;
-    top: -22px;
-    font-size: 190px;
-  }
-
-  .catalog-hero__eyebrow {
-    margin-bottom: 32px;
-    font-size: 9px;
-  }
-
-  .catalog-hero__grid {
-    display: block;
-  }
-
-  .catalog-hero h1 {
-    max-width: 100%;
-    font-size: clamp(40px, 12.5vw, 60px);
-    overflow-wrap: normal;
-  }
-
-  .catalog-hero__brief {
-    min-width: 0;
-    margin-top: 30px;
-    padding: 17px 0 0;
-    border-top: 1px solid #5a554b;
-    border-left: 0;
-  }
-
-  .catalog-hero__brief > p {
-    font-size: 13px;
-  }
-
-  .catalog-hero__brief dl div {
-    align-items: flex-start;
-  }
-
-  .catalog-hero__brief dd {
-    max-width: 65%;
-    font-size: 14px;
-    text-align: right;
-    overflow-wrap: anywhere;
   }
 
   .hero-jump {
@@ -3297,14 +3109,6 @@ a {
     font-size: 21px;
   }
 
-  .catalog-hero__brief dl div {
-    display: block;
-  }
-
-  .catalog-hero__brief dd {
-    margin-top: 3px;
-  }
-
   .filter-panel {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -3497,7 +3301,7 @@ a {
   text-align: right;
 }
 
-.itinerary-heading h2 {
+.itinerary-heading :is(h1, h2) {
   margin: 0;
   font-size: 31px;
   font-weight: 900;
@@ -4000,30 +3804,6 @@ a {
   border-left: 4px solid var(--gold);
 }
 
-.itinerary-map-note {
-  max-width: 720px;
-  margin: 30px 0 0 auto;
-  padding: 16px 18px;
-  color: var(--paper-bright);
-  background: var(--ink);
-  border-left: 4px solid var(--gold);
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-}
-
-.itinerary-map-note p {
-  margin: 0;
-  color: #c8c1b5;
-  font-size: 11px;
-}
-
-.itinerary-map-note strong {
-  display: block;
-  margin-bottom: 3px;
-  color: var(--paper-bright);
-}
-
 @media (max-width: 1040px) {
   .app-header {
     grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
@@ -4489,7 +4269,7 @@ a {
     text-align: left;
   }
 
-  .itinerary-heading h2 {
+  .itinerary-heading :is(h1, h2) {
     font-size: 27px;
   }
 
@@ -4684,16 +4464,6 @@ a {
   .map-provider-switcher,
   .trip-day-jump,
   .itinerary-heading,
-  .itinerary-map-note,
-  .site-tabbar,
-  .cart-fab,
-  .itinerary-day__chevron,
-  .itinerary-stop__rail,
-  .itinerary-stop__directions,
-  .itinerary-stop__zh-hint {
-    display: none !important;
-  }
-
   /* A collapsed day still has to print. Engines that support it reveal the
      slot here; PrintAllDays opens the days for the ones that do not. */
   .itinerary-day::details-content {

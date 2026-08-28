@@ -1,5 +1,4 @@
 import {
-  CalendarDays,
   ChevronDown,
   Clock3,
   Footprints,
@@ -92,7 +91,6 @@ export function ItineraryBoard({
                   <span className="itinerary-day__title">
                     <small>{isCurrent ? "HÔM NAY · CHINA TIME" : dateLabel}</small>
                     <strong>Ngày {dayIndex + 1}</strong>
-                    {day.headline && <span>{day.headline}</span>}
                   </span>
                   <span className="itinerary-day__count">
                     {day.items.length} chặng
@@ -183,14 +181,6 @@ export function ItineraryBoard({
           })}
         </section>
 
-        <aside className="itinerary-map-note">
-          <CalendarDays size={20} aria-hidden="true" />
-          <p>
-            <strong>Chỉ đường mở trang hoạch định tuyến của bản đồ đang chọn.</strong>
-            Chọn Ô tô hoặc Công cộng tại đây, rồi vẫn có thể đổi phương tiện
-            trong ứng dụng bản đồ.
-          </p>
-        </aside>
       </main>
     </>
   );

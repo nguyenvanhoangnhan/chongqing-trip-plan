@@ -24,7 +24,6 @@ export function LocationGuide({ locations }: LocationGuideProps) {
           <Navigation size={16} aria-hidden="true" /> {messages.locations.kicker}
         </span>
         <h2 id="location-title">{messages.locations.title}</h2>
-        <p>{messages.locations.subtitle}</p>
       </div>
 
       <div className="location-list">

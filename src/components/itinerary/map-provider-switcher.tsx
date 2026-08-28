@@ -53,7 +53,6 @@ export function MapProviderSwitcher() {
           );
         })}
       </div>
-      <p>Mọi link địa điểm và chỉ đường bên dưới sẽ mở bằng bản đồ này.</p>
     </fieldset>
   );
 }

@@ -49,17 +49,6 @@ export const vi = {
     },
     progressLabel: "Tiến độ ngân sách cá nhân",
   },
-  catalogHero: {
-    nearby: "Mua thuận tiện ở khu trung tâm",
-    route: "CHONGQING · 伴手礼",
-    title: "Quà Trùng Khánh",
-    giftSummary: (count: number) =>
-      `${count} món có giá tham khảo và điểm mua.`,
-    perPerson: "Mỗi người",
-    updated: "Cập nhật",
-    jump: "Xem quà",
-    cityMark: "重庆",
-  },
   catalog: {
     kicker: "CATALOG · 已选好",
     title: "Chọn quà",
@@ -158,7 +147,6 @@ export const vi = {
   locations: {
     kicker: "Điểm mua",
     title: "Mua ở đâu?",
-    subtitle: "Theo thứ tự lịch trình.",
     nearHotel: "Quanh khu trung tâm",
     inItinerary: "Trong lịch trình",
     travel: "Di chuyển",
