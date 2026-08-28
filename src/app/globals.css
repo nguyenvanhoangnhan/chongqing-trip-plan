@@ -3687,6 +3687,276 @@ a {
   }
 }
 
+/* Expenses: who paid, who owes. */
+.expense-main {
+  width: min(880px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 44px 0 90px;
+  display: grid;
+  gap: 30px;
+}
+
+.expense-balances h2,
+.expense-form h2,
+.expense-list h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.expense-balances ul,
+.expense-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid var(--ink);
+  background: var(--paper-bright);
+}
+
+.expense-balances li,
+.expense-list li {
+  min-height: 64px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expense-balances li + li,
+.expense-list li + li {
+  border-top: 1px solid var(--line);
+}
+
+.expense-balances li > div,
+.expense-list__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.expense-balances li strong {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.expense-balances li span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.expense-balances li[data-settled="true"] {
+  color: var(--muted);
+  background: var(--paper);
+}
+
+.expense-balances li button,
+.expense-list__remove {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--ink);
+  background: var(--paper-bright);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.expense-balances li button {
+  background: var(--gold);
+}
+
+.expense-balances__paid {
+  margin: 12px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.expense-balances__paid > div {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper-bright);
+}
+
+.expense-balances__paid dt {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.expense-balances__paid dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.expense-form {
+  padding: 18px;
+  border: 2px solid var(--ink);
+  background: var(--paper-bright);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 16px;
+}
+
+.expense-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.expense-form label span,
+.expense-form legend {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.expense-form input {
+  min-height: 52px;
+  padding: 0 14px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+}
+
+.expense-form__amount input {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.expense-form__people {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.expense-form__people legend {
+  margin-bottom: 6px;
+}
+
+.expense-form__people button {
+  min-height: 52px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.expense-form__people button[aria-pressed="true"] {
+  color: var(--paper-bright);
+  background: var(--ink);
+}
+
+.expense-form__people button[aria-pressed="true"][data-accent="chili"] {
+  background: var(--chili);
+}
+
+.expense-form__people button[aria-pressed="true"][data-accent="river"] {
+  background: var(--river);
+}
+
+.expense-form__people button[aria-pressed="true"][data-accent="gold"] {
+  color: var(--ink);
+  background: var(--gold);
+}
+
+.expense-form__submit {
+  min-height: 56px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper-bright);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.expense-form__submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.expense-form__status {
+  min-height: 1.2em;
+  margin: 0;
+  font-size: 13px;
+}
+
+.expense-form__status[data-tone="error"] {
+  color: var(--danger);
+}
+
+.expense-list__main strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.expense-list__main span,
+.expense-list__main small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.expense-list__amount {
+  flex: 0 0 auto;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.expense-list__remove[data-armed="true"] {
+  color: var(--paper-bright);
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.expense-list__empty,
+.expense-list__error {
+  margin: 0;
+  padding: 18px;
+  border: 2px dashed var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.expense-list__error {
+  color: var(--danger);
+}
+
 @media (max-width: 820px) {
   body:has(.itinerary-shell) {
     padding-bottom: 0;
@@ -3761,6 +4031,26 @@ a {
 
   .itinerary-heading h2 {
     font-size: 27px;
+  }
+
+  .expense-main {
+    width: calc(100% - 28px);
+    padding-top: 28px;
+  }
+
+  .expense-balances li,
+  .expense-list li {
+    flex-wrap: wrap;
+  }
+
+  .expense-balances li button,
+  .expense-list__remove {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .expense-balances__paid {
+    grid-template-columns: 1fr;
   }
 
   .itinerary-day__summary {
