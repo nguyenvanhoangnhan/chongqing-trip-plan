@@ -186,7 +186,7 @@ export const vi = {
     form: {
       title: "Ghi khoản mới",
       amount: "Số tiền (¥)",
-      amountPlaceholder: "0.00",
+      amountPlaceholder: "0",
       paidBy: "Ai trả",
       participants: "Trả cho",
       note: "Ghi chú",

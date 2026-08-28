@@ -10,7 +10,13 @@ const rates = {
 
 describe("formatCnyInCurrency", () => {
   it("keeps a concrete CNY price exact", () => {
-    expect(formatCnyInCurrency(17.73, "CNY", rates)).toBe("¥17.73");
+    expect(formatCnyInCurrency(17.73, "CNY", rates)).toBe("¥17,73");
+  });
+
+  it("drops decimals a yuan price does not have, so it cannot read as dong", () => {
+    expect(formatCnyInCurrency(38, "CNY", rates)).toBe("¥38");
+    expect(formatCnyInCurrency(45.5, "CNY", rates)).toBe("¥45,5");
+    expect(formatCnyInCurrency(1234, "CNY", rates)).toBe("¥1234");
   });
 
   it("marks converted VND and JPY prices as estimates", () => {

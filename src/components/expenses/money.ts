@@ -1,11 +1,12 @@
 import {
+  formatCnyAmount,
   formatCnyInCurrency,
   type CurrencyRates,
   type DisplayCurrency,
 } from "@/lib/format";
 
 export function formatFen(fen: number): string {
-  return `¥${(fen / 100).toFixed(2)}`;
+  return formatCnyAmount(fen / 100);
 }
 
 /** CNY first, then the traveler's display currency when it differs. */

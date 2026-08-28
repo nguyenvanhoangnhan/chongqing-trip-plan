@@ -83,7 +83,7 @@ export function ExpenseBoard({
     const settlement = createSettlementDraft(debt.from, debt.to, debt.amountFen);
 
     setDraft({
-      amount: settlement.amountCny.toFixed(2),
+      amount: String(settlement.amountCny),
       paidBy: settlement.paidBy,
       participants: settlement.participants,
       note: settlement.note,

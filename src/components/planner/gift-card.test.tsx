@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { giftCatalog } from "@/data/catalog";
 import { GiftCard } from "@/components/planner/gift-card";
+import { formatCnyAmount } from "@/lib/format";
 
 describe("GiftCard", () => {
   const gift = giftCatalog.gifts[0];
@@ -39,7 +40,7 @@ describe("GiftCard", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(gift.brand)).toBeInTheDocument();
     expect(screen.getByText(gift.packVi)).toBeInTheDocument();
-    expect(screen.getByText(`¥${gift.priceCny.toFixed(2)}`)).toBeInTheDocument();
+    expect(screen.getByText(formatCnyAmount(gift.priceCny))).toBeInTheDocument();
     expect(screen.getByText("≈ 45.625 ₫")).toBeInTheDocument();
     expect(screen.queryByText(/\d+-\d+/)).not.toBeInTheDocument();
   });
@@ -323,7 +324,7 @@ describe("GiftCard", () => {
     );
 
     const card = within(container);
-    const cnyPrice = card.getByText(`¥${gift.priceCny.toFixed(2)}`);
+    const cnyPrice = card.getByText(formatCnyAmount(gift.priceCny));
     const vndPrice = card.getByText("≈ 45.625 ₫");
 
     expect(cnyPrice).toHaveClass("gift-card__price");

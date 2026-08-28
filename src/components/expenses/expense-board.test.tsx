@@ -52,7 +52,7 @@ describe("ExpenseBoard", () => {
 
     expect(screen.getByText("Duy nợ Nhân")).toBeInTheDocument();
     expect(screen.getByText("Minh nợ Nhân")).toBeInTheDocument();
-    expect(screen.getAllByText("¥30.00")).toHaveLength(2);
+    expect(screen.getAllByText("¥30")).toHaveLength(2);
     expect(screen.getByText("Đã cân")).toBeInTheDocument();
   });
 
@@ -87,7 +87,7 @@ describe("ExpenseBoard", () => {
 
     await userEvent.click(screen.getAllByRole("button", { name: "Đã trả" })[0]);
 
-    expect(screen.getByLabelText("Số tiền (¥)")).toHaveValue("30.00");
+    expect(screen.getByLabelText("Số tiền (¥)")).toHaveValue("30");
     expect(screen.getByLabelText("Ghi chú")).toHaveValue("Trả nợ");
     expect(
       within(screen.getByRole("group", { name: "Ai trả" })).getByRole("button", {
