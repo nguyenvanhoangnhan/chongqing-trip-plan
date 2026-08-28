@@ -1,4 +1,4 @@
-import { CalendarDays, CloudOff, Gift } from "lucide-react";
+import { CalendarDays, CloudOff, Coins, Gift } from "lucide-react";
 import Link from "next/link";
 
 import { SignOutButton } from "@/components/auth/sign-out-button";
@@ -8,7 +8,7 @@ import { messages } from "@/i18n";
 
 type AppHeaderProps = {
   currentPerson: Person;
-  activePage?: "itinerary" | "gifts";
+  activePage?: "itinerary" | "gifts" | "expenses";
 };
 
 export function AppHeader({
@@ -38,10 +38,18 @@ export function AppHeader({
         <Link href="/gifts" aria-current={activePage === "gifts" ? "page" : undefined}>
           <Gift size={16} aria-hidden="true" /> Quà
         </Link>
+        <Link
+          href="/expenses"
+          aria-current={activePage === "expenses" ? "page" : undefined}
+        >
+          <Coins size={16} aria-hidden="true" /> {messages.expenses.tab}
+        </Link>
       </nav>
 
       <div className="header-account">
-        {activePage === "gifts" && <CurrencySwitcher />}
+        {(activePage === "gifts" || activePage === "expenses") && (
+          <CurrencySwitcher />
+        )}
         <span className="header-account__avatar" data-accent={currentPerson.accent}>
           {currentPerson.displayName.charAt(0)}
         </span>
