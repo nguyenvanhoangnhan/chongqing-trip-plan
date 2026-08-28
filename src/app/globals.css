@@ -2994,8 +2994,83 @@ a {
     margin-top: 0;
   }
 
+  /* Phone: two gifts per row. One card per row turned browsing 82 gifts into
+     a very long scroll, so the card keeps its facts at a smaller scale. */
+  .gift-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
   .gift-card {
-    min-height: 380px;
+    min-height: 0;
+  }
+
+  .gift-card__image {
+    height: 128px;
+  }
+
+  .gift-card__image img {
+    padding: 8px;
+  }
+
+  .gift-card__body {
+    padding: 10px 10px 8px;
+    gap: 6px;
+  }
+
+  .gift-card h3 {
+    font-size: 15px;
+  }
+
+  .gift-card__zh {
+    font-size: 11px;
+  }
+
+  .gift-card__price {
+    font-size: 15px;
+  }
+
+  /* Two per row leaves 170px, so the grid card carries the photo, the name,
+     the price and the button. The list view keeps the full detail. */
+  .gift-grid:not(.gift-grid--list) .gift-card__product-line,
+  .gift-grid:not(.gift-grid--list) .gift-card__reason,
+  .gift-grid:not(.gift-grid--list) .gift-card__facts,
+  .gift-grid:not(.gift-grid--list) .gift-card__details {
+    display: none;
+  }
+
+  .gift-grid:not(.gift-grid--list) .gift-card__zh {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .gift-card__reason {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .gift-card__facts span {
+    padding: 3px 5px;
+    font-size: 9px;
+  }
+
+  .gift-card__details summary {
+    font-size: 10px;
+  }
+
+  .gift-card__people {
+    font-size: 9px;
+  }
+
+  .gift-card__thumbs {
+    display: none;
+  }
+
+  .gift-toggle {
+    min-height: 44px;
+    font-size: 11px;
   }
 
   .person-planner {
