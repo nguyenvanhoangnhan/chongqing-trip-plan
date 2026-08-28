@@ -3,7 +3,6 @@ import {
   ChevronDown,
   Clock3,
   Footprints,
-  MapPin,
   Route,
   TrainFront,
 } from "lucide-react";
@@ -46,32 +45,18 @@ export function ItineraryBoard({
   return (
     <>
       <PrintAllDays />
-      <section className="trip-hero" aria-labelledby="trip-title">
-        <div className="trip-hero__route" aria-hidden="true">
-          <span>CKG</span>
-          <i />
-          <span>DAY 1-5</span>
-        </div>
-        <div className="trip-hero__title">
-          <span className="trip-kicker">
-            <MapPin size={15} aria-hidden="true" /> 重庆 · PRIVATE ROUTE
-          </span>
-          <h1 id="trip-title">{itinerary.title}</h1>
-        </div>
-
-        <nav className="trip-day-jump" aria-label="Đi đến ngày">
-          {itinerary.days.map((day, index) => (
-            <a
-              key={day.id}
-              href={`#${day.id}`}
-              data-current={day.id === currentDayId}
-            >
-              <span>0{index + 1}</span>
-              Ngày {index + 1}
-            </a>
-          ))}
-        </nav>
-      </section>
+      <nav className="trip-day-jump" aria-label="Đi đến ngày">
+        {itinerary.days.map((day, index) => (
+          <a
+            key={day.id}
+            href={`#${day.id}`}
+            data-current={day.id === currentDayId}
+          >
+            <span>0{index + 1}</span>
+            Ngày {index + 1}
+          </a>
+        ))}
+      </nav>
 
       <main className="itinerary-main" id="main-content">
         <div className="itinerary-heading">
@@ -79,7 +64,7 @@ export function ItineraryBoard({
             <Route size={15} aria-hidden="true" /> LỊCH TRÌNH · 行程
           </span>
           <div>
-            <h2>Đi theo từng ngày</h2>
+            <h1>Đi theo từng ngày</h1>
             <p>Chạm vào tiêu đề ngày để thu gọn hoặc mở lại.</p>
           </div>
         </div>
