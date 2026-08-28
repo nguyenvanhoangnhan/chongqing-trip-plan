@@ -32,7 +32,7 @@ export function BalanceSummary({
       className="expense-balances"
       aria-labelledby="expense-balances-title"
     >
-      <h2 id="expense-balances-title">{messages.expenses.title}</h2>
+      <h2 id="expense-balances-title">{messages.expenses.balancesTitle}</h2>
       <ul>
         {balances.pairs.map(({ pair, debt }) => (
           <li key={pair.join("-")} data-settled={debt === null}>
