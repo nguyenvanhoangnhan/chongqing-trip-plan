@@ -162,6 +162,208 @@ a {
   gap: 9px;
 }
 
+.mobile-account-menu {
+  display: none;
+}
+
+.mobile-account-menu__trigger,
+.mobile-account-drawer__close {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--paper-bright);
+  background: #26241f;
+  border: 1px solid #70695d;
+  cursor: pointer;
+  place-items: center;
+}
+
+.mobile-account-menu__trigger:hover,
+.mobile-account-menu__trigger[aria-expanded="true"],
+.mobile-account-drawer__close:hover {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.mobile-account-menu__backdrop {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: rgba(17, 16, 13, 0.66);
+  border: 0;
+  cursor: default;
+  backdrop-filter: blur(2px);
+}
+
+.mobile-account-drawer {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  right: 0;
+  width: min(360px, calc(100vw - 28px));
+  height: 100dvh;
+  padding: 24px 22px max(24px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--paper-bright);
+  background: var(--ink);
+  border-left: 4px solid var(--chili);
+  box-shadow: -18px 0 0 rgba(17, 16, 13, 0.18);
+  animation: mobile-drawer-in 180ms ease-out;
+}
+
+.mobile-account-drawer::after {
+  content: "账户";
+  position: absolute;
+  z-index: -1;
+  right: -13px;
+  bottom: 56px;
+  color: transparent;
+  -webkit-text-stroke: 1px #3c382f;
+  font-family: var(--serif);
+  font-size: 110px;
+  line-height: 1;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+
+.mobile-account-drawer__heading,
+.mobile-account-drawer__person,
+.mobile-account-drawer__currency {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-account-drawer__heading {
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--chili);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mobile-account-drawer__heading small,
+.mobile-account-drawer__heading strong {
+  display: block;
+}
+
+.mobile-account-drawer__heading small {
+  margin-bottom: 5px;
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+.mobile-account-drawer__heading strong {
+  font-family: var(--display);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobile-account-drawer__close {
+  flex: 0 0 auto;
+  display: grid;
+}
+
+.mobile-account-drawer__person {
+  min-height: 86px;
+  padding: 18px 0;
+  border-bottom: 1px solid #4a463d;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.mobile-account-drawer__person .header-account__avatar {
+  width: 48px;
+  height: 48px;
+  display: grid;
+}
+
+.mobile-account-drawer__person small,
+.mobile-account-drawer__person strong {
+  display: block;
+  line-height: 1.2;
+}
+
+.mobile-account-drawer__person small,
+.mobile-account-drawer__currency > span {
+  color: #aaa397;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mobile-account-drawer__person strong {
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+.mobile-account-drawer__currency {
+  padding: 18px 0;
+  border-bottom: 1px solid #4a463d;
+}
+
+.mobile-account-drawer__currency > span {
+  display: block;
+  margin-bottom: 9px;
+}
+
+.mobile-account-drawer__currency .currency-switcher {
+  margin: 0;
+}
+
+.mobile-account-drawer__currency .currency-switcher > div {
+  width: 100%;
+  height: 44px;
+}
+
+.mobile-account-drawer__currency .currency-switcher label {
+  flex: 1 1 0;
+}
+
+.mobile-account-drawer .sign-out-button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 22px;
+  padding: 0 16px;
+  color: var(--paper-bright);
+  background: var(--chili);
+  border-color: var(--chili);
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mobile-account-drawer .sign-out-button:hover {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+@keyframes mobile-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 .currency-switcher {
   margin: 0 8px 0 0;
   padding: 0;
@@ -2533,6 +2735,23 @@ a {
 
   .header-account__avatar {
     display: none;
+  }
+
+  body:has(.mobile-account-drawer) {
+    overflow: hidden;
+  }
+
+  .header-account {
+    display: none;
+  }
+
+  .mobile-account-menu {
+    justify-self: end;
+    display: block;
+  }
+
+  .mobile-account-menu__trigger {
+    display: grid;
   }
 
   .sign-out-button {

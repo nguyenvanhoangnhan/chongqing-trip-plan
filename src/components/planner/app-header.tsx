@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { CurrencySwitcher } from "@/components/planner/currency-switcher";
+import { MobileAccountMenu } from "@/components/planner/mobile-account-menu";
 import type { Person } from "@/domain/people";
 import { messages } from "@/i18n";
 
@@ -59,6 +60,10 @@ export function AppHeader({
         </span>
         <SignOutButton />
       </div>
+      <MobileAccountMenu
+        currentPerson={currentPerson}
+        showCurrency={activePage === "gifts" || activePage === "expenses"}
+      />
       <span className="no-realtime-note">
         <CloudOff size={14} aria-hidden="true" /> {messages.header.refreshNotice}
       </span>
