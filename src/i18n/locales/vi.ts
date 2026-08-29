@@ -192,6 +192,7 @@ export const vi = {
       noNote: "Không ghi chú",
       paidFor: (payer: string, names: string) => `${payer} trả cho ${names}`,
       settlementTag: "TRẢ NỢ",
+      tripDay: (index: number) => `Ngày ${index}`,
       settled: (payer: string, receiver: string) =>
         `${payer} trả nợ cho ${receiver}`,
       each: (amount: string) => `mỗi người ${amount}`,

@@ -9,7 +9,10 @@ import {
   type ExpenseDraft,
   type ExpenseFormStatus,
 } from "@/components/expenses/expense-form";
-import { ExpenseList } from "@/components/expenses/expense-list";
+import {
+  ExpenseList,
+  type TripDay,
+} from "@/components/expenses/expense-list";
 import { SettleDialog } from "@/components/expenses/settle-dialog";
 import {
   calculateBalances,
@@ -28,12 +31,14 @@ type ExpenseBoardProps = {
   currentPerson: Person;
   rates: CurrencyRates;
   initial: StoredLedger;
+  tripDays?: readonly TripDay[];
 };
 
 export function ExpenseBoard({
   currentPerson,
   rates,
   initial,
+  tripDays,
 }: ExpenseBoardProps) {
   const [stored, setStored] = useState(initial);
   const [draft, setDraft] = useState<ExpenseDraft>(() =>
@@ -140,6 +145,7 @@ export function ExpenseBoard({
         entries={stored.ledger.entries}
         currency={currency}
         rates={rates}
+        tripDays={tripDays}
         onRemove={remove}
       />
     </main>

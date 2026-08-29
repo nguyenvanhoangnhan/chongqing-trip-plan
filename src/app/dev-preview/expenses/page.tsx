@@ -58,6 +58,7 @@ export default function DevelopmentExpensesPreviewPage() {
     <div className="app-shell itinerary-shell">
       <AppHeader currentPerson={PEOPLE[1]} activePage="expenses" />
       <ExpenseBoard
+        tripDays={[{ id: "day-1", date: "2026-08-29" }]}
         currentPerson={PEOPLE[1]}
         rates={giftCatalog.metadata.exchangeRates.rates}
         initial={{ ledger: previewLedger, etag: null }}

@@ -3839,8 +3839,7 @@ a {
   text-transform: uppercase;
 }
 
-.expense-balances ul,
-.expense-list ul {
+.expense-balances ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -3848,8 +3847,7 @@ a {
   background: var(--paper-bright);
 }
 
-.expense-balances li,
-.expense-list li {
+.expense-balances li {
   min-height: 64px;
   padding: 12px 14px;
   display: flex;
@@ -3857,13 +3855,11 @@ a {
   gap: 12px;
 }
 
-.expense-balances li + li,
-.expense-list li + li {
+.expense-balances li + li {
   border-top: 1px solid var(--line);
 }
 
-.expense-balances li > div,
-.expense-list__main {
+.expense-balances li > div {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
@@ -3890,12 +3886,11 @@ a {
   background: var(--paper);
 }
 
-.expense-balances li button,
-.expense-list__remove {
+.expense-balances li button {
   min-height: 44px;
   padding: 0 14px;
   border: 2px solid var(--ink);
-  background: var(--paper-bright);
+  background: var(--gold);
   color: var(--ink);
   font-family: var(--mono);
   font-size: 11px;
@@ -3906,10 +3901,6 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.expense-balances li button {
-  background: var(--gold);
 }
 
 .expense-balances__paid {
@@ -4055,39 +4046,173 @@ a {
   color: var(--danger);
 }
 
-.expense-list__main strong {
+.expense-balances ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid var(--ink);
+  background: var(--paper-bright);
+}
+
+.expense-balances li {
+  min-height: 64px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expense-balances li + li {
+  border-top: 1px solid var(--line);
+}
+
+.expense-balances li > div {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* The log is a ledger of the trip: one block per day, each row keyed by the
+   colour of whoever paid. */
+.expense-day + .expense-day {
+  margin-top: 18px;
+}
+
+.expense-day__heading {
+  padding: 0 2px 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.expense-day__heading b {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.expense-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid var(--ink);
+  border-top: 0;
+  background: var(--paper-bright);
+}
+
+.expense-row {
+  padding: 11px 12px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 10px;
+  row-gap: 3px;
+}
+
+.expense-row + .expense-row {
+  border-top: 1px solid var(--line);
+}
+
+.expense-row[data-settlement="true"] {
+  background: #f2eee2;
+}
+
+.expense-row__payer {
+  grid-row: 1 / span 3;
+  align-self: start;
+  width: 30px;
+  height: 30px;
+  color: var(--paper-bright);
+  background: var(--chili);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.expense-row__payer[data-accent="river"] {
+  background: var(--river);
+}
+
+.expense-row__payer[data-accent="gold"] {
+  color: var(--ink);
+  background: var(--gold);
+}
+
+.expense-row__title {
+  min-width: 0;
+  overflow: hidden;
   font-size: 15px;
   font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.expense-list__tag {
-  margin-right: 7px;
-  padding: 2px 5px;
-  color: var(--paper-bright);
-  background: var(--river);
+.expense-row[data-settlement="true"] .expense-row__title {
+  color: var(--river);
   font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: 0.07em;
-  vertical-align: 2px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
 }
 
-.expense-list__main span,
-.expense-list__main small {
+.expense-row__amount {
+  justify-self: end;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.expense-row__people {
+  grid-column: 2 / -1;
   color: var(--muted);
   font-size: 12px;
 }
 
-.expense-list__amount {
-  flex: 0 0 auto;
-  text-align: right;
+.expense-row__meta {
+  grid-column: 2;
+  color: var(--muted);
   font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.04em;
 }
 
-.expense-list__remove[data-armed="true"] {
+.expense-row__remove {
+  grid-column: 3;
+  justify-self: end;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expense-row__remove:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.expense-row__remove[data-armed="true"] {
   color: var(--paper-bright);
   background: var(--danger);
   border-color: var(--danger);
@@ -4291,18 +4416,15 @@ a {
     padding-top: 28px;
   }
 
-  .expense-balances li,
-  .expense-list li {
+  .expense-balances li {
     gap: 10px;
   }
 
-  .expense-balances li strong,
-  .expense-list__main strong {
+  .expense-balances li strong {
     font-size: 14px;
   }
 
-  .expense-balances li button,
-  .expense-list__remove {
+  .expense-balances li button {
     flex: 0 0 auto;
     padding: 0 11px;
     font-size: 10px;
@@ -4322,10 +4444,6 @@ a {
 
   .expense-balances__paid dd {
     font-size: 14px;
-  }
-
-  .expense-list__amount {
-    font-size: 12px;
   }
 
   .expense-form {
