@@ -1,6 +1,8 @@
 import {
   AlertTriangle,
+  BookOpen,
   CheckSquare,
+  ExternalLink,
   HelpCircle,
   Mountain,
   Phone,
@@ -65,6 +67,20 @@ export function WulongGuide({ day, isMobile = false }: WulongGuideProps) {
           <Mountain size={15} aria-hidden="true" /> {guide.date} · 武隆
         </span>
         <h1>{guide.headline}</h1>
+
+        <a
+          className="guide-featured"
+          href={guide.featured.url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <BookOpen size={16} aria-hidden="true" />
+          <span>
+            <strong>{guide.featured.label}</strong>
+            <small>{guide.featured.note}</small>
+          </span>
+          <ExternalLink size={14} aria-hidden="true" />
+        </a>
       </header>
 
       <section aria-labelledby="guide-timeline-title" className="guide-section">

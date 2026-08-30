@@ -60,6 +60,16 @@ describe("WulongGuide", () => {
     expect(call).toHaveAttribute("href", "tel:4000235666");
   });
 
+  it("leads with the traveler post the plan was built from", () => {
+    render(<WulongGuide day={dayFixture()} />);
+
+    const featured = screen.getByRole("link", { name: /Nhật ký chuyến đi/ });
+    expect(featured.getAttribute("href")).toContain(
+      "sweetiesandrose.wordpress.com",
+    );
+    expect(featured.closest("header")).not.toBeNull();
+  });
+
   it("keeps every claim next to the source it came from", () => {
     render(<WulongGuide day={dayFixture()} />);
 

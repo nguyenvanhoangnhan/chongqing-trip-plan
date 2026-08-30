@@ -13,6 +13,11 @@ export const WULONG_GUIDE = {
   date: "31/08/2026",
   headline: "Vũ Long trong ngày",
   hotline: "4000235666",
+  featured: {
+    label: "Nhật ký chuyến đi tháng 5/2026 của một khách Việt",
+    url: "https://sweetiesandrose.wordpress.com/2026/05/18/cach-di-cong-vien-%e6%ad%a6%e9%9a%86-wulong-tu-trung-khanh/",
+    note: "Bài gốc, đọc trước khi đi.",
+  } satisfies GuideSource & { note: string },
   trains: [
     {
       label: "Chiều đi",
@@ -168,10 +173,6 @@ export const WULONG_GUIDE = {
     {
       label: "Hai khu đóng vì mưa lũ 7/6/2026 và mở lại 8/6",
       url: "https://www.wlkst.com/wlxw/27875.jhtml",
-    },
-    {
-      label: "Nhật ký chuyến đi tháng 5/2026 của một khách Việt",
-      url: "https://sweetiesandrose.wordpress.com/2026/05/18/cach-di-cong-vien-%e6%ad%a6%e9%9a%86-wulong-tu-trung-khanh/",
     },
   ] satisfies GuideSource[],
 } as const;
