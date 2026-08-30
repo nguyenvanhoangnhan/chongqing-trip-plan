@@ -1,4 +1,7 @@
+import Link from "next/link";
 import {
+  ArrowRight,
+  BookOpen,
   ChevronDown,
   Clock3,
   Footprints,
@@ -18,6 +21,11 @@ type ItineraryBoardProps = {
   defaultOpenDayIds: readonly string[];
   progress?: ItineraryProgress;
   isMobile?: boolean;
+};
+
+/** Days with a page of their own, keyed by day id. */
+const DAY_GUIDES: Record<string, string | undefined> = {
+  "day-3": "Chi tiết Vũ Long trip",
 };
 
 const NO_PROGRESS: ItineraryProgress = {
@@ -103,6 +111,14 @@ export function ItineraryBoard({
                 </summary>
 
                 <div className="itinerary-day__body">
+                  {DAY_GUIDES[day.id] && (
+                    <Link className="itinerary-day__guide" href="/wulong">
+                      <BookOpen size={16} aria-hidden="true" />
+                      {DAY_GUIDES[day.id]}
+                      <ArrowRight size={15} aria-hidden="true" />
+                    </Link>
+                  )}
+
                   {day.items.map((item, itemIndex) => {
                     const stopProgress =
                       item.id === progress.currentItemId
