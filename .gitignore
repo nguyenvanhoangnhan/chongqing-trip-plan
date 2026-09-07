@@ -12,6 +12,7 @@ test-results/
 /tmp/
 /agent-output-*.md
 .worktrees/
+.claude/worktrees/
 *.log
 *.tsbuildinfo
 .DS_Store

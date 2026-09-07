@@ -10,5 +10,8 @@ export default defineConfig([
     "coverage/**",
     "playwright-report/**",
     "test-results/**",
+    "tmp/**",
+    // A git worktree under .claude holds a second copy of the whole repo.
+    "**/.claude/**",
   ]),
 ]);
