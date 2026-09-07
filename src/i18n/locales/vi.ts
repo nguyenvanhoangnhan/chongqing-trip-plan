@@ -9,8 +9,6 @@ export const vi = {
     cityMark: "重庆",
     location: "Trùng Khánh · 重庆",
     titleLines: ["Trùng", "Khánh"],
-    description:
-      "Lịch trình, chỉ đường Baidu hoặc Amap và danh sách quà của cả nhóm.",
     boardLabel: "PRIVATE TRIP BOARD",
     boardDate: "DAY 1 → DAY 5",
     giftMark: "行程",
@@ -23,7 +21,6 @@ export const vi = {
     alternative: "hoặc",
     googleMark: "G",
     googleButton: "Tiếp tục bằng Google",
-    privacy: "Mỗi người chỉ sửa danh sách của mình.",
   },
   auth: {
     signOut: "Đăng xuất",

@@ -17,6 +17,10 @@ import {
   type DisplayCurrency,
 } from "@/lib/format";
 
+// Enough rows to fill the desktop list's fixed loading height; the mobile
+// stylesheet trims the tail so the panel does not run long there.
+const SKELETON_ROWS = [0, 1, 2, 3, 4, 5];
+
 type PersonPlannerProps = {
   activePersonId: PersonId;
   currentPersonId: PersonId;
@@ -98,22 +102,30 @@ export function PersonPlanner({
             {messages.planner.listTitle(activePerson.displayName)}
           </h2>
         </div>
-        {isLoading ? null : (
-          <div className="person-planner__heading-actions">
-            <button
-              type="button"
-              className="person-planner__expand"
-              onClick={() => setIsFullCartOpen(true)}
-              aria-label={messages.planner.openFullCartLabel(
-                activePerson.displayName,
-              )}
+        <div className="person-planner__heading-actions">
+          <button
+            type="button"
+            className="person-planner__expand"
+            disabled={isLoading}
+            onClick={() => setIsFullCartOpen(true)}
+            aria-label={messages.planner.openFullCartLabel(
+              activePerson.displayName,
+            )}
+          >
+            <Expand size={15} aria-hidden="true" />
+            {messages.planner.openFullCart}
+          </button>
+          {isLoading ? (
+            <span
+              className="person-planner__count skeleton-text"
+              aria-hidden="true"
             >
-              <Expand size={15} aria-hidden="true" />
-              {messages.planner.openFullCart}
-            </button>
+              00
+            </span>
+          ) : (
             <span className="person-planner__count">{entries.length}</span>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {readOnly && (
@@ -128,12 +140,22 @@ export function PersonPlanner({
           className="selection-list selection-list--loading"
           aria-hidden="true"
         >
-          {[0, 1, 2].map((row) => (
-            <li className="selection-row-skeleton" key={row}>
-              <span className="selection-row-skeleton__thumb" />
-              <span className="selection-row-skeleton__lines">
-                <span />
-                <span />
+          {SKELETON_ROWS.map((row) => (
+            <li className="selection-row selection-row-skeleton" key={row}>
+              <span className="selection-row__thumbnail selection-row-skeleton__thumb" />
+              <span className="selection-row__content">
+                <span className="selection-row__title selection-row-skeleton__title">
+                  <span>
+                    <strong className="skeleton-text">Tên món quà</strong>
+                    <span className="skeleton-text">礼物名称</span>
+                  </span>
+                </span>
+                <span className="selection-row__controls">
+                  <span className="quantity-control selection-row-skeleton__quantity" />
+                  <strong className="selection-row__subtotal skeleton-text">
+                    0.000.000 ₫
+                  </strong>
+                </span>
               </span>
             </li>
           ))}
@@ -175,14 +197,21 @@ export function PersonPlanner({
           <span>
             {messages.planner.personalTotal(activePerson.displayName)}
           </span>
-          <strong>
-            {formatCnyInCurrency(totalCny, currency, exchangeRates)}
-          </strong>
+          {isLoading ? (
+            <strong className="skeleton-text" aria-hidden="true">
+              0.000.000 ₫
+            </strong>
+          ) : (
+            <strong>
+              {formatCnyInCurrency(totalCny, currency, exchangeRates)}
+            </strong>
+          )}
         </div>
         <BudgetMeter
           totalCny={totalCny}
           exchangeRates={exchangeRates}
           currency={currency}
+          loading={isLoading}
         />
       </div>
 

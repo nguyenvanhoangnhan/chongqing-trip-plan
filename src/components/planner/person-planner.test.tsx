@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { PersonPlanner } from "@/components/planner/person-planner";
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import { PEOPLE } from "@/domain/people";
 
 describe("PersonPlanner", () => {
@@ -44,17 +44,30 @@ describe("PersonPlanner", () => {
     const { container } = renderPlanner({ isLoading: true });
 
     expect(container.querySelectorAll(".selection-row-skeleton")).toHaveLength(
-      3,
+      6,
     );
     expect(screen.queryByText("Chưa có quà")).not.toBeInTheDocument();
   });
 
-  it("hides the item count until the list has arrived", () => {
+  it("keeps the heading layout while loading with a count placeholder", () => {
     const { container } = renderPlanner({ isLoading: true });
 
+    const count = container.querySelector(".person-planner__count");
+    expect(count).toHaveClass("skeleton-text");
+    expect(count).toHaveAttribute("aria-hidden", "true");
     expect(
-      container.querySelector(".person-planner__count"),
-    ).not.toBeInTheDocument();
+      container.querySelector(".person-planner__expand"),
+    ).toBeDisabled();
+  });
+
+  it("shows a total placeholder instead of a zero total while loading", () => {
+    const { container } = renderPlanner({ isLoading: true });
+
+    const total = container.querySelector(".person-planner__total strong");
+    expect(total).toHaveClass("skeleton-text");
+    expect(
+      container.querySelector(".person-planner__budget .budget-meter"),
+    ).toHaveClass("budget-meter--loading");
   });
 
   it("marks the list busy while a save is in flight", () => {
@@ -108,8 +121,12 @@ describe("PersonPlanner", () => {
       0,
     );
     expect(screen.getByText("Chưa có quà")).toBeInTheDocument();
-    expect(container.querySelector(".person-planner__count")?.textContent).toBe(
-      "0",
-    );
+    const count = container.querySelector(".person-planner__count");
+    expect(count?.textContent).toBe("0");
+    expect(count).not.toHaveClass("skeleton-text");
+    expect(container.querySelector(".person-planner__expand")).toBeEnabled();
+    expect(
+      container.querySelector(".person-planner__total strong"),
+    ).not.toHaveClass("skeleton-text");
   });
 });

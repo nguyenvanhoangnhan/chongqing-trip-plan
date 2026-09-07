@@ -13,6 +13,7 @@ type TravelerOverviewProps = {
   currency: DisplayCurrency;
   currentPersonId: PersonId;
   activePersonId: PersonId;
+  isLoading?: boolean;
   onSelectPerson: (personId: PersonId) => void;
 };
 
@@ -22,6 +23,7 @@ export function TravelerOverview({
   currency,
   currentPersonId,
   activePersonId,
+  isLoading = false,
   onSelectPerson,
 }: TravelerOverviewProps) {
   return (
@@ -68,13 +70,20 @@ export function TravelerOverview({
                     )}
                   </small>
                 </span>
-                <b>{selection.entries.length.toString().padStart(2, "0")}</b>
+                {isLoading ? (
+                  <b className="skeleton-text" aria-hidden="true">
+                    00
+                  </b>
+                ) : (
+                  <b>{selection.entries.length.toString().padStart(2, "0")}</b>
+                )}
               </span>
               <BudgetMeter
                 totalCny={totalCny}
                 exchangeRates={exchangeRates}
                 currency={currency}
                 compact
+                loading={isLoading}
               />
             </button>
           );

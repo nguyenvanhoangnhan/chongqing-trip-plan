@@ -2,6 +2,18 @@ export const PERSON_IDS = ["traveler-1", "traveler-2", "traveler-3"] as const;
 
 export type PersonId = (typeof PERSON_IDS)[number];
 
+/**
+ * Whether a value is a slot this build knows. A session cookie issued before
+ * the slots were numbered still carries the old id, and taking that on trust
+ * bounces the traveler between the itinerary and the login page.
+ */
+export function isPersonId(value: unknown): value is PersonId {
+  return (
+    typeof value === "string" &&
+    (PERSON_IDS as readonly string[]).includes(value)
+  );
+}
+
 export type Person = {
   id: PersonId;
   displayName: string;

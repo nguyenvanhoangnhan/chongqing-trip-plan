@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
-import type { PersonId } from "@/domain/people";
+import { isPersonId } from "@/domain/people";
 import { travelerEmailPolicy } from "@/server/auth/allowed-emails";
 import { authorizeTravelerCredentials } from "@/server/auth/credentials-auth";
 import type { TravelerPasswordHashes } from "@/server/auth/passwords";
@@ -62,13 +62,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       if (person) {
         token.personId = person.id;
+      } else if (!isPersonId(token.personId)) {
+        // The slot this token was issued for no longer exists.
+        delete token.personId;
       }
 
       return token;
     },
     session({ session, token }) {
-      if (token.personId) {
-        session.user.personId = token.personId as PersonId;
+      if (isPersonId(token.personId)) {
+        session.user.personId = token.personId;
       }
 
       return session;

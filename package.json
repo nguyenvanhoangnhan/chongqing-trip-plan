@@ -14,7 +14,10 @@
     "itinerary:pull": "node --env-file=.env.local scripts/itinerary.ts pull",
     "itinerary:validate": "node --env-file=.env.local scripts/itinerary.ts validate",
     "itinerary:push": "node --env-file=.env.local scripts/itinerary.ts push",
-    "maps:check": "node scripts/check-map-links.ts"
+    "maps:check": "node scripts/check-map-links.ts",
+    "catalog:pull": "node --env-file=.env.local scripts/catalog.ts pull",
+    "catalog:validate": "node --env-file=.env.local scripts/catalog.ts validate",
+    "catalog:push": "node --env-file=.env.local scripts/catalog.ts push"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.3.0",

@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import { GiftCard } from "@/components/planner/gift-card";
 import { formatCnyAmount } from "@/lib/format";
 
@@ -33,8 +33,9 @@ describe("GiftCard", () => {
 
     expect(onToggle).toHaveBeenCalledWith(gift.id);
     expect(screen.queryByText("Có gần Raffles")).not.toBeInTheDocument();
-    expect(screen.getByText("Raffles City")).toBeInTheDocument();
-    expect(screen.getByText("Bát Nhất Lộ")).toBeInTheDocument();
+    for (const location of purchaseLocations) {
+      expect(screen.getByText(location.tagVi)).toBeInTheDocument();
+    }
     expect(
       screen.getByRole("img", { name: gift.images[0].altVi }),
     ).toBeInTheDocument();

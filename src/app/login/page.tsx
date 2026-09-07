@@ -45,7 +45,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               </span>
             ))}
           </h1>
-          <p>{messages.login.description}</p>
         </div>
       </section>
 
@@ -95,9 +94,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             {messages.login.googleButton}
             <ArrowRight size={18} aria-hidden="true" />
           </a>
-          <small className="login-panel__privacy">
-            {messages.login.privacy}
-          </small>
         </div>
       </section>
     </main>

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { ExpenseBoard } from "@/components/expenses/expense-board";
 import { AppHeader } from "@/components/planner/app-header";
-import { giftCatalog } from "@/data/catalog";
+import { BlobCatalogRepository } from "@/server/catalog/service";
 import { PEOPLE } from "@/domain/people";
 import { BlobExpenseRepository } from "@/server/expenses/service";
 import { BlobItineraryRepository } from "@/server/itinerary/service";
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExpensesPage() {
+  const giftCatalog = await new BlobCatalogRepository().read();
   const session = await auth();
 
   if (!session?.user?.personId) {

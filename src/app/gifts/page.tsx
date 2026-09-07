@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import { GiftPlanner } from "@/components/planner/gift-planner";
-import { giftCatalog } from "@/data/catalog";
+import { BlobCatalogRepository } from "@/server/catalog/service";
 import { PEOPLE } from "@/domain/people";
 
 export const metadata: Metadata = {
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GiftsPage() {
+  const giftCatalog = await new BlobCatalogRepository().read();
   const session = await auth();
 
   if (!session?.user?.personId) {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SelectionRow } from "@/components/planner/selection-row";
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import type { SelectionEntry } from "@/domain/selections";
 
 describe("SelectionRow", () => {

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ExpenseBoard } from "@/components/expenses/expense-board";
 import { AppHeader } from "@/components/planner/app-header";
-import { giftCatalog } from "@/data/catalog";
+import { BlobCatalogRepository } from "@/server/catalog/service";
 import type { ExpenseLedger } from "@/domain/expenses";
 import { PEOPLE } from "@/domain/people";
 
@@ -49,7 +49,8 @@ const previewLedger: ExpenseLedger = {
   ],
 };
 
-export default function DevelopmentExpensesPreviewPage() {
+export default async function DevelopmentExpensesPreviewPage() {
+  const giftCatalog = await new BlobCatalogRepository().read();
   if (process.env.NODE_ENV !== "development") {
     notFound();
   }

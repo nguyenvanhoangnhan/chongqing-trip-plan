@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { PersonPlanner } from "@/components/planner/person-planner";
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import { PEOPLE } from "@/domain/people";
 
 describe("PersonPlanner full cart", () => {

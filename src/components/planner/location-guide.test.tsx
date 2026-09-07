@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { LocationGuide } from "@/components/planner/location-guide";
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 
 const originalClipboard = navigator.clipboard;
 
@@ -21,21 +21,19 @@ describe("LocationGuide", () => {
 
     expect(
       screen.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent),
-    ).toEqual([
-      "Raffles City Trùng Khánh",
-      "Hồng Nhai Động",
-      "Khu Giải Phóng Bi - Bát Nhất Lộ",
-      "Công viên sáng tạo Nhị Xưởng",
-      "Phố cổ Từ Khí Khẩu",
-    ]);
+    ).toEqual(
+      [...giftCatalog.locations]
+        .sort((left, right) => left.itineraryOrder - right.itineraryOrder)
+        .map((location) => location.name.vi),
+    );
   });
 
   it("presents each stop as a concise itinerary step", () => {
     render(<LocationGuide locations={giftCatalog.locations} />);
 
-    expect(screen.getByText("Quanh khu trung tâm")).toBeInTheDocument();
-    expect(screen.getAllByText("Trong lịch trình")).toHaveLength(4);
-    expect(screen.getAllByRole("article")).toHaveLength(5);
+    expect(screen.getAllByRole("article")).toHaveLength(
+      giftCatalog.locations.length,
+    );
   });
 
   it("copies the exact Chinese map query from a location action", async () => {
@@ -50,7 +48,11 @@ describe("LocationGuide", () => {
       screen.getAllByRole("button", { name: "Tìm trên bản đồ" })[0],
     );
 
-    expect(writeText).toHaveBeenCalledWith("重庆来福士 L1 重庆伴手礼");
+    expect(writeText).toHaveBeenCalledWith(
+      [...giftCatalog.locations].sort(
+        (left, right) => left.itineraryOrder - right.itineraryOrder,
+      )[0].mapQuery,
+    );
     expect(
       screen.getByRole("button", { name: "Đã sao chép" }),
     ).toBeInTheDocument();

@@ -2,14 +2,15 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { GiftPlanner } from "@/components/planner/gift-planner";
-import { giftCatalog } from "@/data/catalog";
+import { BlobCatalogRepository } from "@/server/catalog/service";
 import { PEOPLE } from "@/domain/people";
 
 export const metadata: Metadata = {
   title: "Chongqing trip",
 };
 
-export default function DevelopmentPreviewPage() {
+export default async function DevelopmentPreviewPage() {
+  const giftCatalog = await new BlobCatalogRepository().read();
   if (process.env.NODE_ENV !== "development") {
     notFound();
   }

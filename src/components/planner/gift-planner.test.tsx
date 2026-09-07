@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { GiftPlanner } from "@/components/planner/gift-planner";
-import { giftCatalog } from "@/data/catalog";
+import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import { PEOPLE } from "@/domain/people";
 import {
   createEmptySelection,
@@ -59,6 +59,7 @@ describe("GiftPlanner", () => {
       }),
     );
   });
+
 
   it("keeps a gift added while the first load is still in flight", async () => {
     const user = userEvent.setup();
