@@ -1,21 +1,22 @@
 import type { GiftCatalog } from "@/domain/gifts";
 
 /**
- * A fictional catalog for tests. The real one is private trip research and
- * lives only in Blob, so nothing here names a real product, shop or price.
+ * A fictional catalog for component tests. The real one is trip research and
+ * lives only in Blob, so nothing here names a real product, shop, price or
+ * source. The integrity suite checks the real thing separately.
  */
 export const CATALOG_FIXTURE = {
   "schemaVersion": 2,
   "metadata": {
-    "updatedAt": "2026-08-24",
+    "updatedAt": "2035-01-01",
     "exchangeRates": {
       "baseCurrency": "CNY",
       "rates": {
         "CNY": 1,
-        "VND": 3860,
-        "JPY": 23.65
+        "VND": 3500,
+        "JPY": 21
       },
-      "referenceDate": "2026-08-23",
+      "referenceDate": "2035-01-01",
       "noteVi": "Tỷ giá mẫu."
     },
     "budget": {
@@ -26,10 +27,10 @@ export const CATALOG_FIXTURE = {
   },
   "context": {
     "homeBase": {
-      "name": "Central reference area",
-      "nameZh": "重庆市中心",
-      "district": "Yuzhong",
-      "mapQuery": "重庆市中心"
+      "name": "Fictional reference area",
+      "nameZh": "示例市中心",
+      "district": "Fictional district",
+      "mapQuery": "示例市中心"
     },
     "shoppingStrategyVi": [
       "Lịch mua sắm mẫu."
@@ -48,23 +49,22 @@ export const CATALOG_FIXTURE = {
       "tagVi": "Điểm 1",
       "type": "mall",
       "nearRaffles": true,
-      "distanceKm": 2,
+      "distanceKm": 1,
       "travelMinutes": {
-        "min": 15,
-        "max": 25
+        "min": 5,
+        "max": 10
       },
       "bestForVi": "Hạng mục 1",
       "mapQuery": "示例商场1",
-      "verificationNoteVi": "Dữ liệu mẫu 1.",
+      "verificationNoteVi": "Kiểm lại điểm 1 trước khi đi.",
       "visitPlan": {
         "inItinerary": true,
-        "dateVi": "Ngày mẫu 1",
-        "dedicatedShoppingStop": true,
-        "itineraryNoteVi": "Gợi ý mẫu: ăn trưa, dạo khu quà địa phương và quay lại vào buổi mua riêng nếu còn thiếu món."
+        "dateVi": "Ngày 1",
+        "dedicatedShoppingStop": false,
+        "itineraryNoteVi": "Ghi chú lịch trình 1."
       },
       "sources": [
-        "https://www.capitaland.com/cn/zh/shop/malls-listing/raffles-city-chongqi.html",
-        "https://www.ichongqing.info/2023/11/01/raffles-city-chongqing/amp/"
+        "https://example.com/fictional-source"
       ]
     },
     {
@@ -76,25 +76,24 @@ export const CATALOG_FIXTURE = {
         "pinyin": "Shìlì shāngchǎng 2"
       },
       "tagVi": "Điểm 2",
-      "type": "shopping-street",
+      "type": "supermarket",
       "nearRaffles": true,
-      "distanceKm": 0.5,
+      "distanceKm": 2,
       "travelMinutes": {
-        "min": 5,
-        "max": 10
+        "min": 10,
+        "max": 20
       },
       "bestForVi": "Hạng mục 2",
       "mapQuery": "示例商场2",
-      "verificationNoteVi": "Dữ liệu mẫu 2.",
+      "verificationNoteVi": "Kiểm lại điểm 2 trước khi đi.",
       "visitPlan": {
         "inItinerary": true,
-        "dateVi": "Ngày mẫu 2",
+        "dateVi": "Ngày 2",
         "dedicatedShoppingStop": false,
-        "itineraryNoteVi": "Gợi ý mẫu: ghé khi khám phá Giải Phóng Bi, rồi so giá tại siêu thị và các cửa hàng dọc Bát Nhất Lộ."
+        "itineraryNoteVi": "Ghi chú lịch trình 2."
       },
       "sources": [
-        "https://www.ichongqing.info/2020/11/04/visit-chongqings-most-famous-pedestrian-street-jfb-chongqing-travel-guide/",
-        "https://scjgj.cq.gov.cn/zz/yzq/zwxx_146775/bmdt_146776/202602/t20260214_15446291.html"
+        "https://example.com/fictional-source"
       ]
     },
     {
@@ -106,25 +105,24 @@ export const CATALOG_FIXTURE = {
         "pinyin": "Shìlì shāngchǎng 3"
       },
       "tagVi": "Điểm 3",
-      "type": "heritage-area",
-      "nearRaffles": true,
-      "distanceKm": 1,
+      "type": "shopping-street",
+      "nearRaffles": false,
+      "distanceKm": 3,
       "travelMinutes": {
-        "min": 10,
-        "max": 20
+        "min": 15,
+        "max": 30
       },
       "bestForVi": "Hạng mục 3",
       "mapQuery": "示例商场3",
-      "verificationNoteVi": "Dữ liệu mẫu 3.",
+      "verificationNoteVi": "Kiểm lại điểm 3 trước khi đi.",
       "visitPlan": {
-        "inItinerary": true,
-        "dateVi": "Ngày mẫu 3",
-        "dedicatedShoppingStop": false,
-        "itineraryNoteVi": "Gợi ý mẫu: ghé vào buổi tối, xem mẫu quà trước rồi đối chiếu giá ở điểm mua sắm khác."
+        "inItinerary": false,
+        "dateVi": "Ngày 3",
+        "dedicatedShoppingStop": true,
+        "itineraryNoteVi": "Ghi chú lịch trình 3."
       },
       "sources": [
-        "https://whlyw.cq.gov.cn/zjwl/yzq/jqjd_1/202203/t20220304_10463056.html",
-        "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202512/t20251208_15218393.html"
+        "https://example.com/fictional-source"
       ]
     }
   ],
@@ -141,14 +139,14 @@ export const CATALOG_FIXTURE = {
       "packVi": "Gói 1",
       "sku": "fictional-gift-1",
       "category": "food",
-      "priceCny": 11.82,
-      "priceCheckedAt": "2026-08-24",
+      "priceCny": 11,
+      "priceCheckedAt": "2035-01-01",
       "priceSourceUrl": "https://example.com/fictional-price",
       "images": [
         {
           "src": "/api/gift-images/fictional-gift-1.webp",
           "altVi": "Ảnh món quà 1",
-          "sourceUrl": "https://whole-product-image.smzdm.com/whole_product_picture/img14.360buyimg.com_pop_jfs_t1_336177_5_22756_130037_68fb452bF1160e250_e19cce488805ba52.jpg"
+          "sourceUrl": "https://example.com/fictional-image.jpg"
         }
       ],
       "recipientsVi": [
@@ -156,29 +154,25 @@ export const CATALOG_FIXTURE = {
       ],
       "priority": "high",
       "localRelevance": "signature",
-      "whyBuyVi": "Lý do mua món 1.",
-      "askInChinese": "请问有桥头200克麻辣牛油火锅底料吗？",
+      "whyBuyVi": "Lý do mua món quà 1.",
+      "askInChinese": "请问有礼物1吗？",
       "portability": "easy",
       "customs": {
-        "level": "caution",
-        "noteVi": "Có dầu/bơ bò; bọc chống rò và ưu tiên hành lý ký gửi."
+        "level": "low",
+        "noteVi": "Ghi chú hải quan 1."
       },
       "nearRaffles": true,
       "purchaseLocationIds": [
         "fictional-location-1"
       ],
       "buyingTipsVi": [
-        "Đối chiếu đúng thương hiệu, vị và khối lượng trên card.",
-        "Giá trên card là giá tham khảo của đúng SKU tại ngày kiểm tra."
+        "Mẹo mua 1."
       ],
       "tags": [
-        "cốt lẩu",
-        "cay tê",
-        "gói nhỏ"
+        "the-loai-1"
       ],
       "sources": [
-        "https://www.smzdm.com/ju/s8vjrxn/",
-        "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202504/t20250403_14479452.html"
+        "https://example.com/fictional-source"
       ]
     },
     {
@@ -193,45 +187,40 @@ export const CATALOG_FIXTURE = {
       "packVi": "Gói 2",
       "sku": "fictional-gift-2",
       "category": "tea",
-      "priceCny": 38,
-      "priceCheckedAt": "2026-08-24",
+      "priceCny": 12,
+      "priceCheckedAt": "2035-01-02",
       "priceSourceUrl": "https://example.com/fictional-price",
       "images": [
         {
           "src": "/api/gift-images/fictional-gift-2.webp",
           "altVi": "Ảnh món quà 2",
-          "sourceUrl": "https://6839169.s21i.faiusr.com/2/ABUIABACGAAgxeLAwQYozaSR0QIwoAY4oAY.jpg"
+          "sourceUrl": "https://example.com/fictional-image.jpg"
         }
       ],
       "recipientsVi": [
         "Người nhận 2"
       ],
-      "priority": "high",
-      "localRelevance": "signature",
-      "whyBuyVi": "Lý do mua món 2.",
-      "askInChinese": "请问有苗品记重庆沱茶02吗？",
-      "portability": "easy",
+      "priority": "medium",
+      "localRelevance": "regional",
+      "whyBuyVi": "Lý do mua món quà 2.",
+      "askInChinese": "请问有礼物2吗？",
+      "portability": "medium",
       "customs": {
-        "level": "low",
-        "noteVi": "Sản phẩm khô, đóng gói thương mại; giữ nguyên nhãn và kiểm tra quy định hành lý trước chuyến bay."
+        "level": "caution",
+        "noteVi": "Ghi chú hải quan 2."
       },
       "nearRaffles": true,
       "purchaseLocationIds": [
-        "fictional-location-1"
+        "fictional-location-2"
       ],
       "buyingTipsVi": [
-        "Đối chiếu đúng thương hiệu, vị và khối lượng trên card.",
-        "Giá trên card là giá tham khảo của đúng SKU tại ngày kiểm tra."
+        "Mẹo mua 2."
       ],
       "tags": [
-        "trà",
-        "tuo cha",
-        "nhẹ",
-        "dễ mang"
+        "the-loai-2"
       ],
       "sources": [
-        "https://tsylt.com/h-pd-1916.html",
-        "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202504/t20250403_14479452.html"
+        "https://example.com/fictional-source"
       ]
     },
     {
@@ -246,45 +235,40 @@ export const CATALOG_FIXTURE = {
       "packVi": "Gói 3",
       "sku": "fictional-gift-3",
       "category": "craft",
-      "priceCny": 148,
-      "priceCheckedAt": "2026-08-24",
+      "priceCny": 13,
+      "priceCheckedAt": "2035-01-03",
       "priceSourceUrl": "https://example.com/fictional-price",
       "images": [
         {
           "src": "/api/gift-images/fictional-gift-3.webp",
           "altVi": "Ảnh món quà 3",
-          "sourceUrl": "https://6839169.s21i.faiusr.com/2/ABUIABACGAAgtd2H0gYo1MWnGTCgBjigBg.jpg"
+          "sourceUrl": "https://example.com/fictional-image.jpg"
         }
       ],
       "recipientsVi": [
         "Người nhận 3"
       ],
-      "priority": "high",
+      "priority": "low",
       "localRelevance": "cultural",
-      "whyBuyVi": "Lý do mua món 3.",
-      "askInChinese": "请问有十七乘十七厘米的夏布吊脚楼小画吗？",
-      "portability": "medium",
+      "whyBuyVi": "Lý do mua món quà 3.",
+      "askInChinese": "请问有礼物3吗？",
+      "portability": "difficult",
       "customs": {
-        "level": "low",
-        "noteVi": "Sản phẩm khô, đóng gói thương mại; giữ nguyên nhãn và kiểm tra quy định hành lý trước chuyến bay."
+        "level": "avoid",
+        "noteVi": "Ghi chú hải quan 3."
       },
       "nearRaffles": false,
       "purchaseLocationIds": [
-        "fictional-location-1"
+        "fictional-location-3"
       ],
       "buyingTipsVi": [
-        "Xác nhận đúng mẫu nhà sàn, không phải mẫu hoa trà.",
-        "Kẹp giữa hai lớp quần áo để tránh cong khung."
+        "Mẹo mua 3."
       ],
       "tags": [
-        "Hạ Bố",
-        "tranh nhỏ",
-        "nhà sàn",
-        "phi vật thể"
+        "the-loai-3"
       ],
       "sources": [
-        "https://tsylt.com/h-pd-2057.html",
-        "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202504/t20250403_14479452.html"
+        "https://example.com/fictional-source"
       ]
     }
   ]

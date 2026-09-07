@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { CATALOG_FIXTURE as giftCatalog } from "@/data/catalog-fixture";
 import { GiftCard } from "@/components/planner/gift-card";
-import { formatCnyAmount } from "@/lib/format";
+import { formatCnyAmount, formatCnyInCurrency } from "@/lib/format";
 
 describe("GiftCard", () => {
   const gift = giftCatalog.gifts[0];
@@ -42,7 +42,7 @@ describe("GiftCard", () => {
     expect(screen.getByText(gift.brand)).toBeInTheDocument();
     expect(screen.getByText(gift.packVi)).toBeInTheDocument();
     expect(screen.getByText(formatCnyAmount(gift.priceCny))).toBeInTheDocument();
-    expect(screen.getByText("≈ 45.625 ₫")).toBeInTheDocument();
+    expect(screen.getByText(formatCnyInCurrency(gift.priceCny, "VND", giftCatalog.metadata.exchangeRates.rates))).toBeInTheDocument();
     expect(screen.queryByText(/\d+-\d+/)).not.toBeInTheDocument();
   });
 
@@ -326,7 +326,7 @@ describe("GiftCard", () => {
 
     const card = within(container);
     const cnyPrice = card.getByText(formatCnyAmount(gift.priceCny));
-    const vndPrice = card.getByText("≈ 45.625 ₫");
+    const vndPrice = card.getByText(formatCnyInCurrency(gift.priceCny, "VND", giftCatalog.metadata.exchangeRates.rates));
 
     expect(cnyPrice).toHaveClass("gift-card__price");
     expect(vndPrice).toHaveClass("gift-card__price");
