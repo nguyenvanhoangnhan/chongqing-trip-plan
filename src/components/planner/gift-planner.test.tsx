@@ -31,7 +31,7 @@ vi.mock("@/lib/selections-client", async (importOriginal) => {
 });
 
 describe("GiftPlanner", () => {
-  const currentPerson = PEOPLE.find((person) => person.id === "nhan")!;
+  const currentPerson = PEOPLE.find((person) => person.id === "traveler-2")!;
   const gift = giftCatalog.gifts[0];
   const catalog = {
     ...giftCatalog,
@@ -142,7 +142,7 @@ describe("GiftPlanner", () => {
     await waitFor(() => expect(saveSelectionMock).toHaveBeenCalledTimes(2));
 
     expect(saveSelectionMock).toHaveBeenLastCalledWith(
-      "nhan",
+      "traveler-2",
       [
         {
           giftId: gift.id,
@@ -198,7 +198,7 @@ describe("GiftPlanner", () => {
 
     await waitFor(() =>
       expect(saveSelectionMock).toHaveBeenCalledWith(
-        "nhan",
+        "traveler-2",
         [
           {
             giftId: gift.id,
@@ -217,7 +217,7 @@ describe("GiftPlanner", () => {
       }),
     );
     await waitFor(() =>
-      expect(saveSelectionMock).toHaveBeenLastCalledWith("nhan", [], "etag-1"),
+      expect(saveSelectionMock).toHaveBeenLastCalledWith("traveler-2", [], "etag-1"),
     );
     expect(
       screen.queryByRole("button", { name: "Lưu danh sách" }),
@@ -252,7 +252,7 @@ describe("GiftPlanner", () => {
       .mockResolvedValueOnce({
         selection: {
           schemaVersion: 1,
-          personId: "nhan",
+          personId: "traveler-2",
           updatedAt: "2026-08-24T12:01:00.000Z",
           entries: [firstEntry, secondEntry],
         },
@@ -288,7 +288,7 @@ describe("GiftPlanner", () => {
       resolveFirstSave?.({
         selection: {
           schemaVersion: 1,
-          personId: "nhan",
+          personId: "traveler-2",
           updatedAt: "2026-08-24T12:00:00.000Z",
           entries: [firstEntry],
         },
@@ -298,7 +298,7 @@ describe("GiftPlanner", () => {
 
     await waitFor(() => expect(saveSelectionMock).toHaveBeenCalledTimes(2));
     expect(saveSelectionMock).toHaveBeenLastCalledWith(
-      "nhan",
+      "traveler-2",
       [firstEntry, secondEntry],
       "etag-1",
     );

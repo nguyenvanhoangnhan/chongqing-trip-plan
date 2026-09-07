@@ -15,7 +15,7 @@ export const vi = {
     boardDate: "DAY 1 → DAY 5",
     giftMark: "行程",
     title: "Đăng nhập",
-    access: "Chỉ Duy, Nhân và Minh được truy cập.",
+    access: "Chỉ ba người trong nhóm được truy cập.",
     signInFailed: "Không đăng nhập được. Kiểm tra người dùng và mật khẩu.",
     selectPerson: "Chọn người",
     password: "Mật khẩu",

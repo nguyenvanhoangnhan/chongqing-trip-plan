@@ -19,12 +19,12 @@ const nhan = PEOPLE[1];
 
 const hotpot: ExpenseEntry = {
   id: "11111111-1111-4111-8111-111111111111",
-  paidBy: "nhan",
-  participants: ["duy", "nhan", "minh"],
+  paidBy: "traveler-2",
+  participants: ["traveler-1", "traveler-2", "traveler-3"],
   amountCny: 90,
   note: "Lẩu",
   kind: "expense",
-  createdBy: "nhan",
+  createdBy: "traveler-2",
   createdAt: "2026-08-29T12:00:00.000Z",
 };
 
@@ -51,8 +51,8 @@ describe("ExpenseBoard", () => {
       <ExpenseBoard currentPerson={nhan} rates={rates} initial={ledgerWith([hotpot])} />,
     );
 
-    expect(screen.getByText("Duy nợ Nhân")).toBeInTheDocument();
-    expect(screen.getByText("Minh nợ Nhân")).toBeInTheDocument();
+    expect(screen.getByText("Traveler 1 nợ Traveler 2")).toBeInTheDocument();
+    expect(screen.getByText("Traveler 3 nợ Traveler 2")).toBeInTheDocument();
     expect(screen.getAllByText("¥30")).toHaveLength(2);
     expect(screen.getByText("Đã cân")).toBeInTheDocument();
   });
@@ -66,15 +66,15 @@ describe("ExpenseBoard", () => {
     await userEvent.type(screen.getByLabelText("Số tiền (¥)"), "90");
     await userEvent.click(
       within(screen.getByRole("group", { name: "Trả cho" })).getByRole("button", {
-        name: "Duy",
+        name: "Traveler 1",
       }),
     );
     await userEvent.type(screen.getByLabelText("Ghi chú"), "Lẩu");
     await userEvent.click(screen.getByRole("button", { name: "Lưu khoản" }));
 
     expect(addExpense).toHaveBeenCalledWith({
-      paidBy: "nhan",
-      participants: ["nhan", "minh"],
+      paidBy: "traveler-2",
+      participants: ["traveler-2", "traveler-3"],
       amountCny: 90,
       note: "Lẩu",
       kind: "expense",
@@ -91,7 +91,7 @@ describe("ExpenseBoard", () => {
     await userEvent.click(screen.getAllByRole("button", { name: "Đã trả" })[0]);
 
     const dialog = screen.getByRole("dialog", { name: "Ghi khoản trả nợ" });
-    expect(within(dialog).getByText("Duy trả Nhân ¥30?")).toBeInTheDocument();
+    expect(within(dialog).getByText("Traveler 1 trả Traveler 2 ¥30?")).toBeInTheDocument();
     expect(addExpense).not.toHaveBeenCalled();
 
     await userEvent.click(
@@ -99,8 +99,8 @@ describe("ExpenseBoard", () => {
     );
 
     expect(addExpense).toHaveBeenCalledWith({
-      paidBy: "duy",
-      participants: ["nhan"],
+      paidBy: "traveler-1",
+      participants: ["traveler-2"],
       amountCny: 30,
       note: "Trả nợ",
       kind: "settlement",
@@ -127,12 +127,12 @@ describe("ExpenseBoard", () => {
   it("marks a settlement in the log", () => {
     const settlement: ExpenseEntry = {
       id: "22222222-2222-4222-8222-222222222222",
-      paidBy: "duy",
-      participants: ["nhan"],
+      paidBy: "traveler-1",
+      participants: ["traveler-2"],
       amountCny: 30,
       note: "Trả nợ",
       kind: "settlement",
-      createdBy: "duy",
+      createdBy: "traveler-1",
       createdAt: "2026-08-29T13:00:00.000Z",
     };
     render(
@@ -144,8 +144,8 @@ describe("ExpenseBoard", () => {
     );
 
     expect(screen.getByText("TRẢ NỢ")).toBeInTheDocument();
-    expect(screen.getByText("Duy trả nợ cho Nhân")).toBeInTheDocument();
-    expect(screen.getByText("Nhân trả cho Duy, Nhân, Minh")).toBeInTheDocument();
+    expect(screen.getByText("Traveler 1 trả nợ cho Traveler 2")).toBeInTheDocument();
+    expect(screen.getByText("Traveler 2 trả cho Traveler 1, Traveler 2, Traveler 3")).toBeInTheDocument();
   });
 
   it("asks twice before deleting", async () => {

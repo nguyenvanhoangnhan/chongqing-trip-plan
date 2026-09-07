@@ -36,7 +36,7 @@ export const usePlannerStore = create<PlannerStore>()(
       priority: "all",
       nearRafflesOnly: false,
       sort: "default",
-      activePersonId: "nhan",
+      activePersonId: "traveler-2",
       catalogView: "grid",
       currency: "VND",
       setSearch: (search) => set({ search }),

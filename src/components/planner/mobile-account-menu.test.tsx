@@ -18,7 +18,7 @@ test("opens the mobile account drawer and closes it with Escape", async () => {
   expect(trigger).toHaveAttribute("aria-expanded", "true");
   const drawer = screen.getByRole("dialog", { name: "Tài khoản" });
   expect(drawer).toBeInTheDocument();
-  expect(screen.getByText("Nhân")).toBeInTheDocument();
+  expect(screen.getByText("Traveler 2")).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Đăng xuất" })).toBeInTheDocument();
   expect(screen.getByRole("radiogroup", { name: "Đơn vị tiền" })).toBeInTheDocument();
   expect(

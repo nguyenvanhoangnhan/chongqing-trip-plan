@@ -9,9 +9,9 @@ import type { TravelerPasswordHashes } from "@/server/auth/passwords";
 import { sessionPolicy } from "@/server/auth/session-policy";
 
 const travelerPasswordHashes: TravelerPasswordHashes = {
-  duy: process.env.AUTH_PASSWORD_HASH_DUY,
-  nhan: process.env.AUTH_PASSWORD_HASH_NHAN,
-  minh: process.env.AUTH_PASSWORD_HASH_MINH,
+  "traveler-1": process.env.AUTH_PASSWORD_HASH_1,
+  "traveler-2": process.env.AUTH_PASSWORD_HASH_2,
+  "traveler-3": process.env.AUTH_PASSWORD_HASH_3,
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth({

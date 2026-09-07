@@ -53,12 +53,12 @@ describe("GiftCard", () => {
         currency="CNY"
         exchangeRates={giftCatalog.metadata.exchangeRates.rates}
         isSelected
-        selectedBy={["Duy", "Minh"]}
+        selectedBy={["Traveler 1", "Traveler 3"]}
         onToggle={vi.fn()}
       />,
     );
 
-    expect(screen.getByText("Duy, Minh đã chọn")).toBeInTheDocument();
+    expect(screen.getByText("Traveler 1, Traveler 3 đã chọn")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /bỏ khỏi danh sách/i }),
     ).toBeInTheDocument();

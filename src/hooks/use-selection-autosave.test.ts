@@ -15,7 +15,7 @@ function storedSelection() {
   return {
     selection: {
       schemaVersion: 1 as const,
-      personId: "nhan" as const,
+      personId: "traveler-2" as const,
       updatedAt: "2026-08-24T00:00:00.000Z",
       entries: [],
     },
@@ -31,7 +31,7 @@ describe("useSelectionAutosave", () => {
   function renderAutosave() {
     return renderHook(() =>
       useSelectionAutosave({
-        personId: "nhan",
+        personId: "traveler-2",
         onStored: vi.fn(),
         onConflict: vi.fn().mockResolvedValue(storedSelection()),
       }),

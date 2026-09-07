@@ -11,8 +11,8 @@ describe("selection authorization", () => {
   ];
 
   it("allows a traveler to update only their own list", () => {
-    expect(prepareSelectionUpdate("duy", "duy", entries).personId).toBe("duy");
-    expect(() => prepareSelectionUpdate("duy", "nhan", entries)).toThrow(
+    expect(prepareSelectionUpdate("traveler-1", "traveler-1", entries).personId).toBe("traveler-1");
+    expect(() => prepareSelectionUpdate("traveler-1", "traveler-2", entries)).toThrow(
       "FORBIDDEN_SELECTION_UPDATE",
     );
   });
@@ -26,11 +26,11 @@ describe("BlobSelectionRepository", () => {
     };
     const repository = new BlobSelectionRepository(blobClient);
 
-    const result = await repository.read("nhan");
+    const result = await repository.read("traveler-2");
 
     expect(result.selection.entries).toEqual([]);
     expect(result.etag).toBeNull();
-    expect(blobClient.get).toHaveBeenCalledWith("selections/nhan.json", {
+    expect(blobClient.get).toHaveBeenCalledWith("selections/traveler-2.json", {
       access: "private",
       useCache: false,
     });
@@ -41,7 +41,7 @@ describe("BlobSelectionRepository", () => {
     // but a conditional put only accepts the strong form.
     const selection = {
       schemaVersion: 1,
-      personId: "nhan",
+      personId: "traveler-2",
       updatedAt: "2026-08-24T13:31:36.833Z",
       entries: [],
     };
@@ -55,7 +55,7 @@ describe("BlobSelectionRepository", () => {
     };
     const repository = new BlobSelectionRepository(blobClient);
 
-    const result = await repository.read("nhan");
+    const result = await repository.read("traveler-2");
 
     expect(result.etag).toBe('"4b45a98bcf32b6992dad8a603536fdf4"');
   });
@@ -66,15 +66,15 @@ describe("BlobSelectionRepository", () => {
       put: vi.fn().mockResolvedValue({ etag: "etag-next" }),
     };
     const repository = new BlobSelectionRepository(blobClient);
-    const selection = prepareSelectionUpdate("minh", "minh", [
+    const selection = prepareSelectionUpdate("traveler-3", "traveler-3", [
       { giftId: "chen-mahua", quantity: 1, unitPriceCny: 25, note: "Vị ngọt" },
     ]);
 
-    const result = await repository.write("minh", selection, "etag-current");
+    const result = await repository.write("traveler-3", selection, "etag-current");
 
     expect(result.etag).toBe("etag-next");
     expect(blobClient.put).toHaveBeenCalledWith(
-      "selections/minh.json",
+      "selections/traveler-3.json",
       JSON.stringify(selection),
       expect.objectContaining({
         access: "private",

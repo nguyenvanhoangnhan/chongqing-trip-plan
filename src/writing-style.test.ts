@@ -34,3 +34,24 @@ describe("writing style", () => {
     expect(offenders).toEqual([]);
   });
 });
+
+// The traveler slots are numbered so the public repository never names anyone.
+// Only the id literals are checked: a name like "Nhân" also spells ordinary
+// Vietnamese words, and guarding on those would fire on the gift catalog.
+const RETIRED_SLOT_ID = /"(duy|nhan|minh)"/;
+
+describe("traveler slots", () => {
+  test("keeps the retired slot ids out of the source and the catalog", () => {
+    const offenders = ROOTS.flatMap(sourceFiles).flatMap((path) =>
+      readFileSync(path, "utf8")
+        .split("\n")
+        .flatMap((line, index) =>
+          RETIRED_SLOT_ID.test(line)
+            ? [`${relative(".", path)}:${index + 1}: ${line.trim()}`]
+            : [],
+        ),
+    );
+
+    expect(offenders).toEqual([]);
+  });
+});

@@ -60,7 +60,7 @@ describe("private gift images", () => {
 
   it("returns a private cacheable image to an authenticated traveler", async () => {
     const response = await createGiftImageResponse({
-      authenticatedPersonId: "nhan",
+      authenticatedPersonId: "traveler-2",
       filename: "example-product.webp",
       repository: new BlobGiftImageRepository({
         get: async () => blobResult(),
@@ -77,7 +77,7 @@ describe("private gift images", () => {
 
   it("returns 404 when the private image is missing", async () => {
     const response = await createGiftImageResponse({
-      authenticatedPersonId: "nhan",
+      authenticatedPersonId: "traveler-2",
       filename: "missing.webp",
       repository: new BlobGiftImageRepository({ get: async () => null }),
     });

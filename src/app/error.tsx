@@ -23,7 +23,7 @@ export default function AppError({ error, reset }: AppErrorProps) {
       <h1>Trang chưa tải được</h1>
       <p>
         Máy chủ gặp lỗi khi dựng trang. Thử tải lại; nếu vẫn lỗi, gửi mã bên
-        dưới cho Nhân.
+        dưới cho người dựng app.
       </p>
       <button type="button" onClick={() => reset()}>
         <RotateCcw size={16} aria-hidden="true" /> Tải lại

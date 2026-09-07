@@ -11,12 +11,12 @@ import {
 
 const entry: ExpenseEntry = {
   id: "11111111-1111-4111-8111-111111111111",
-  paidBy: "nhan",
-  participants: ["duy", "nhan", "minh"],
+  paidBy: "traveler-2",
+  participants: ["traveler-1", "traveler-2", "traveler-3"],
   amountCny: 90,
   note: "Lẩu",
   kind: "expense",
-  createdBy: "nhan",
+  createdBy: "traveler-2",
   createdAt: "2026-08-29T10:00:00.000Z",
 };
 

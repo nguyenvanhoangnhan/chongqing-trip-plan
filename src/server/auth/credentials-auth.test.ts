@@ -6,7 +6,7 @@ import { LoginRateLimiter } from "@/server/auth/login-rate-limit";
 
 const validHash =
   "scrypt$cHVibGljLXRlc3Qtc2FsdA$Tal8FcLrhq49B5mWDwDyzG7NvnucsR6o5NymudfqDqs";
-const policy = createEmailPolicy({ duy: "duy@example.com" });
+const policy = createEmailPolicy({ "traveler-1": "first@example.com" });
 
 function loginRequest(ip = "203.0.113.10") {
   return new Request("https://example.com/api/auth/callback/credentials", {
@@ -21,14 +21,14 @@ describe("credentials authorization", () => {
       windowMs: 15 * 60 * 1_000,
     });
     const options = {
-      passwordHashes: { duy: validHash },
+      passwordHashes: { "traveler-1": validHash },
       emailPolicy: policy,
       limiter,
     };
 
     await expect(
       authorizeTravelerCredentials(
-        { personId: "duy", password: "wrong" },
+        { personId: "traveler-1", password: "wrong" },
         loginRequest(),
         options,
       ),
@@ -36,17 +36,17 @@ describe("credentials authorization", () => {
 
     await expect(
       authorizeTravelerCredentials(
-        { personId: "duy", password: "test-only-password" },
+        { personId: "traveler-1", password: "test-only-password" },
         loginRequest(),
         options,
       ),
     ).resolves.toMatchObject({
-      id: "duy",
-      email: "duy@example.com",
+      id: "traveler-1",
+      email: "first@example.com",
     });
 
     await authorizeTravelerCredentials(
-      { personId: "duy", password: "wrong" },
+      { personId: "traveler-1", password: "wrong" },
       loginRequest(),
       options,
     );
@@ -63,10 +63,10 @@ describe("credentials authorization", () => {
 
     await expect(
       authorizeTravelerCredentials(
-        { personId: "duy", password: "test-only-password" },
+        { personId: "traveler-1", password: "test-only-password" },
         loginRequest(),
         {
-          passwordHashes: { duy: validHash },
+          passwordHashes: { "traveler-1": validHash },
           emailPolicy: policy,
           limiter,
         },

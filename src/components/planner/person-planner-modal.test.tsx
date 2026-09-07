@@ -43,10 +43,10 @@ describe("PersonPlanner full cart", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
     await userEvent.click(
-      screen.getByRole("button", { name: /xem toàn bộ giỏ của nhân/i }),
+      screen.getByRole("button", { name: /xem toàn bộ giỏ của traveler 2/i }),
     );
 
-    const dialog = screen.getByRole("dialog", { name: "Giỏ của Nhân" });
+    const dialog = screen.getByRole("dialog", { name: "Giỏ của Traveler 2" });
     expect(
       within(dialog).getByRole("img", { name: gift.images[0].altVi }),
     ).toBeInTheDocument();

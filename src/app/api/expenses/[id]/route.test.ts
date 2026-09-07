@@ -40,14 +40,14 @@ describe("DELETE /api/expenses/[id]", () => {
   });
 
   it("returns 404 for an unknown id", async () => {
-    vi.mocked(auth).mockResolvedValue({ user: { personId: "nhan" } } as never);
+    vi.mocked(auth).mockResolvedValue({ user: { personId: "traveler-2" } } as never);
     vi.mocked(removeEntry).mockResolvedValue(null);
 
     expect((await DELETE(request, params("abc"))).status).toBe(404);
   });
 
   it("returns the ledger after removing", async () => {
-    vi.mocked(auth).mockResolvedValue({ user: { personId: "nhan" } } as never);
+    vi.mocked(auth).mockResolvedValue({ user: { personId: "traveler-2" } } as never);
     vi.mocked(removeEntry).mockResolvedValue({ ledger: emptyLedger, etag: '"e2"' });
 
     const response = await DELETE(request, params("abc"));

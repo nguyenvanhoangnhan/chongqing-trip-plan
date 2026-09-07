@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import type { PersonId } from "@/domain/people";
 
-export const PERSON_IDS = ["duy", "nhan", "minh"] as const;
+export const PERSON_IDS = ["traveler-1", "traveler-2", "traveler-3"] as const;
 
 const PersonIdSchema = z.enum(PERSON_IDS);
 
@@ -52,9 +52,9 @@ export type LedgerBalances = {
 };
 
 const PAIRS: readonly [PersonId, PersonId][] = [
-  ["duy", "nhan"],
-  ["duy", "minh"],
-  ["nhan", "minh"],
+  ["traveler-1", "traveler-2"],
+  ["traveler-1", "traveler-3"],
+  ["traveler-2", "traveler-3"],
 ];
 
 export function createEmptyLedger(): ExpenseLedger {
@@ -93,11 +93,11 @@ export function calculateBalances(
   entries: readonly ExpenseEntry[],
 ): LedgerBalances {
   const owed: Record<PersonId, Record<PersonId, number>> = {
-    duy: { duy: 0, nhan: 0, minh: 0 },
-    nhan: { duy: 0, nhan: 0, minh: 0 },
-    minh: { duy: 0, nhan: 0, minh: 0 },
+    "traveler-1": { "traveler-1": 0, "traveler-2": 0, "traveler-3": 0 },
+    "traveler-2": { "traveler-1": 0, "traveler-2": 0, "traveler-3": 0 },
+    "traveler-3": { "traveler-1": 0, "traveler-2": 0, "traveler-3": 0 },
   };
-  const paidFen: Record<PersonId, number> = { duy: 0, nhan: 0, minh: 0 };
+  const paidFen: Record<PersonId, number> = { "traveler-1": 0, "traveler-2": 0, "traveler-3": 0 };
 
   for (const entry of entries) {
     paidFen[entry.paidBy] += toFen(entry.amountCny);

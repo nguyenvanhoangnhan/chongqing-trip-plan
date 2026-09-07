@@ -14,7 +14,7 @@ export async function GET(
   const session = await auth();
   const { filename } = await context.params;
   const developmentPreviewPersonId: PersonId | null =
-    process.env.NODE_ENV === "development" ? "nhan" : null;
+    process.env.NODE_ENV === "development" ? "traveler-2" : null;
 
   return createGiftImageResponse({
     authenticatedPersonId:

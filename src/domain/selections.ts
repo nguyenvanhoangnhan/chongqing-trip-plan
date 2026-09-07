@@ -14,7 +14,7 @@ export const SelectionEntrySchema = z.object({
 
 export const PersonSelectionSchema = z.object({
   schemaVersion: z.literal(1),
-  personId: z.enum(["duy", "nhan", "minh"]),
+  personId: z.enum(["traveler-1", "traveler-2", "traveler-3"]),
   updatedAt: z.string().datetime(),
   entries: z.array(SelectionEntrySchema),
 });

@@ -41,7 +41,7 @@ describe("GET /api/expenses", () => {
   });
 
   it("returns the ledger and etag without caching", async () => {
-    vi.mocked(auth).mockResolvedValue({ user: { personId: "nhan" } } as never);
+    vi.mocked(auth).mockResolvedValue({ user: { personId: "traveler-2" } } as never);
     readLedger.mockResolvedValue({ ledger: emptyLedger, etag: '"e1"' });
 
     const response = await GET();
@@ -56,7 +56,7 @@ describe("POST /api/expenses", () => {
   beforeEach(() => {
     vi.mocked(auth).mockReset();
     vi.mocked(appendEntry).mockReset();
-    vi.mocked(auth).mockResolvedValue({ user: { personId: "nhan" } } as never);
+    vi.mocked(auth).mockResolvedValue({ user: { personId: "traveler-2" } } as never);
   });
 
   const request = (body: unknown) =>
@@ -68,7 +68,7 @@ describe("POST /api/expenses", () => {
 
   it("rejects an invalid body", async () => {
     const response = await POST(
-      request({ paidBy: "nhan", participants: [], amountCny: 1, note: "" }),
+      request({ paidBy: "traveler-2", participants: [], amountCny: 1, note: "" }),
     );
 
     expect(response.status).toBe(400);
@@ -81,8 +81,8 @@ describe("POST /api/expenses", () => {
 
     const response = await POST(
       request({
-        paidBy: "duy",
-        participants: ["duy", "nhan"],
+        paidBy: "traveler-1",
+        participants: ["traveler-1", "traveler-2"],
         amountCny: 30,
         note: " Taxi ",
       }),
@@ -91,11 +91,11 @@ describe("POST /api/expenses", () => {
     expect(response.status).toBe(200);
     const entry = vi.mocked(appendEntry).mock.calls[0][1];
     expect(entry).toMatchObject({
-      paidBy: "duy",
-      participants: ["duy", "nhan"],
+      paidBy: "traveler-1",
+      participants: ["traveler-1", "traveler-2"],
       amountCny: 30,
       note: "Taxi",
-      createdBy: "nhan",
+      createdBy: "traveler-2",
     });
     expect(entry.id).toMatch(/^[0-9a-f-]{36}$/);
     expect(() => new Date(entry.createdAt).toISOString()).not.toThrow();
