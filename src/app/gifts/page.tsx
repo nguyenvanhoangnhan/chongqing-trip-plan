@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default async function GiftsPage() {
-  const giftCatalog = await new BlobCatalogRepository().read();
   const session = await auth();
 
   if (!session?.user?.personId) {
@@ -26,6 +25,8 @@ export default async function GiftsPage() {
   if (!currentPerson) {
     redirect("/login");
   }
+
+  const giftCatalog = await new BlobCatalogRepository().read();
 
   return <GiftPlanner catalog={giftCatalog} currentPerson={currentPerson} />;
 }

@@ -10,10 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default async function DevelopmentPreviewPage() {
-  const giftCatalog = await new BlobCatalogRepository().read();
   if (process.env.NODE_ENV !== "development") {
     notFound();
   }
+
+  const giftCatalog = await new BlobCatalogRepository().read();
 
   return <GiftPlanner catalog={giftCatalog} currentPerson={PEOPLE[1]} />;
 }

@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ExpensesPage() {
-  const giftCatalog = await new BlobCatalogRepository().read();
   const session = await auth();
 
   if (!session?.user?.personId) {
@@ -29,6 +28,8 @@ export default async function ExpensesPage() {
   if (!currentPerson) {
     redirect("/login");
   }
+
+  const giftCatalog = await new BlobCatalogRepository().read();
 
   const initial = await new BlobExpenseRepository().read();
   // The log labels each day by its place in the trip. A missing itinerary only

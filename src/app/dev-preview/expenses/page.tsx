@@ -50,10 +50,11 @@ const previewLedger: ExpenseLedger = {
 };
 
 export default async function DevelopmentExpensesPreviewPage() {
-  const giftCatalog = await new BlobCatalogRepository().read();
   if (process.env.NODE_ENV !== "development") {
     notFound();
   }
+
+  const giftCatalog = await new BlobCatalogRepository().read();
 
   return (
     <div className="app-shell itinerary-shell">
