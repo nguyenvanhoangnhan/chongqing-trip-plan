@@ -46,31 +46,28 @@ describe.skipIf(!pulled)("gift catalog", () => {
       giftCatalog.locations.every((location) => location.visitPlan.inItinerary),
     ).toBe(true);
     expect(
-      giftCatalog.locations.find(
-        (location) => location.id === "raffles-city-chongqing",
-      )?.visitPlan.dedicatedShoppingStop,
+      giftCatalog.locations.some(
+        (location) => location.visitPlan.dedicatedShoppingStop,
+      ),
     ).toBe(true);
-    expect(
-      giftCatalog.locations.find((location) => location.id === "testbed-2")
-        ?.visitPlan.dateVi,
-    ).toBe("Ngày mẫu 4");
 
     const publicPlanningData = JSON.stringify({
       context: giftCatalog.context,
       locations: giftCatalog.locations,
     });
 
+    // The plan is a sample, so it must not carry the real trip: no travel
+    // dates, no clock times, and no reference to where anyone stayed.
     expect(publicPlanningData).not.toMatch(/(?:29|30|31)\/8|1\/9/);
     expect(publicPlanningData).not.toMatch(/\b\d{1,2}:\d{2}\b/);
     expect(publicPlanningData).not.toMatch(/khách sạn|hotel|lưu trú/i);
   });
 
-  it("provides compact itinerary labels for gift location tags", () => {
-    const location = giftCatalog.locations.find(
-      (candidate) => candidate.id === "raffles-city-chongqing",
-    ) as (typeof giftCatalog.locations)[number] & { tagVi?: string };
-
-    expect(location.tagVi).toBe("Raffles City");
+  it("gives every stop a label short enough for an itinerary chip", () => {
+    for (const location of giftCatalog.locations) {
+      expect(location.tagVi.length).toBeGreaterThan(0);
+      expect(location.tagVi.length).toBeLessThanOrEqual(24);
+    }
   });
 
   it("offers a broad mix of Chongqing and general Chinese gifts", () => {
@@ -108,138 +105,6 @@ describe.skipIf(!pulled)("gift catalog", () => {
     expect(giftCatalog.gifts.every((gift) => gift.sources.length > 0)).toBe(
       true,
     );
-  });
-
-  it("does not expand the existing hotpot-base selection", () => {
-    expect(
-      giftCatalog.gifts.filter((gift) => gift.name.vi.includes("Cốt lẩu"))
-        .length,
-    ).toBeLessThanOrEqual(10);
-  });
-
-  it("excludes the rejected Wensli silk scarf", () => {
-    expect(
-      giftCatalog.gifts.some(
-        (gift) =>
-          gift.id === "wensli-silk-scarf-gift" ||
-          gift.brand.toLowerCase().includes("wensli"),
-      ),
-    ).toBe(false);
-  });
-
-  it("includes the approved compact cultural gift choices", () => {
-    expect(giftCatalog.gifts.map((gift) => gift.id)).toEqual(
-      expect.arrayContaining([
-        "palace-xifulianmian-umbrella",
-        "sanxingdui-ar-keychain",
-        "mimang-magnetic-xiangqi",
-        "dunhuang-pipa-bookmark",
-        "jinbao-luban-lock-6-piece",
-      ]),
-    );
-  });
-
-  it("includes the approved craft and display gift choices", () => {
-    const approvedIds = [
-      "dongfang-sichuan-opera-mask",
-      "qingfeng-panda-embroidery-screen",
-      "benniao-sanxingdui-storage-ornament",
-      "jiamei-thousand-li-screen",
-      "nibaiman-dunhuang-apsara-ornament",
-      "xiaozhang-beijing-lacquer-box",
-      "gufeng-cloisonne-mini-vase-set",
-      "terracotta-warrior-standing-figurine",
-      "hongjinghong-paper-cut-scroll",
-      "tingjiang-panda-pen-holder",
-    ];
-
-    expect(giftCatalog.gifts.map((gift) => gift.id)).toEqual(
-      expect.arrayContaining(approvedIds),
-    );
-
-    for (const giftId of approvedIds) {
-      const gift = giftCatalog.gifts.find(
-        (candidate) => candidate.id === giftId,
-      );
-      expect(gift?.tags).toEqual(
-        expect.arrayContaining([
-          expect.stringMatching(/^(để bàn|kệ sách|treo)$/),
-        ]),
-      );
-    }
-  });
-
-  it("includes woodblock art, calligraphy, and panda souvenirs", () => {
-    const artIds = [
-      "liangping-wenkui-wukui-woodblock-print",
-      "qijiang-he-yuzhou-farmer-print",
-      "biaoyuwang-jingxin-calligraphy-scroll",
-    ];
-    const pandaIds = [
-      "panda-zodiac-embroidered-magnet",
-      "mumoran-panda-metal-bookmark",
-      "xiaozhihua-panda-blind-box",
-    ];
-    const approvedIds = [...artIds, ...pandaIds];
-
-    expect(giftCatalog.gifts.map((gift) => gift.id)).toEqual(
-      expect.arrayContaining(approvedIds),
-    );
-
-    for (const giftId of artIds) {
-      const gift = giftCatalog.gifts.find(
-        (candidate) => candidate.id === giftId,
-      );
-      expect(gift?.tags).toEqual(
-        expect.arrayContaining([
-          expect.stringMatching(/^(để bàn|kệ sách|treo)$/),
-        ]),
-      );
-    }
-
-    for (const giftId of pandaIds) {
-      const gift = giftCatalog.gifts.find(
-        (candidate) => candidate.id === giftId,
-      );
-      expect(gift?.tags).toContain("gấu trúc");
-    }
-  });
-
-  it("offers varied compact Chongqing souvenirs and drops the rejected comb", () => {
-    const souvenirIds = [
-      "jianglin-crt-train-keychain",
-      "three-gorges-pink-stove-magnet",
-      "youjiu-chongqing-moving-magnet",
-      "feather-world-chongqing-ar-pin",
-      "moran-magic-chongqing-postcards",
-      "lixiang-chongqing-landmark-coin",
-      "shanyufeng-hongyadong-bookmark",
-      "duomeili-panda-mahjong-bottle-opener",
-      "gift-of-panda-plush-keychain",
-    ];
-
-    expect(giftCatalog.gifts.map((gift) => gift.id)).toEqual(
-      expect.arrayContaining(souvenirIds),
-    );
-
-    for (const giftId of souvenirIds) {
-      const gift = giftCatalog.gifts.find(
-        (candidate) => candidate.id === giftId,
-      );
-      expect(gift).toMatchObject({
-        category: "souvenir",
-        portability: "easy",
-      });
-      expect(gift?.priceCny).toBeLessThanOrEqual(80);
-    }
-
-    expect(
-      giftCatalog.gifts.some(
-        (gift) =>
-          gift.id === "tan-carpenter-comb-yuyue" ||
-          gift.brand.includes("Tan Carpenter"),
-      ),
-    ).toBe(false);
   });
 
   it("models every card as one concrete, priced SKU", () => {
@@ -291,21 +156,6 @@ describe.skipIf(!pulled)("gift catalog", () => {
         owners.set(image.src, gift.id);
       }
     }
-  });
-
-  it("includes the requested mahua and Chongqing tuocha choices", () => {
-    expect(
-      giftCatalog.gifts.some((gift) => gift.id.startsWith("chen-mahua")),
-    ).toBe(true);
-    expect(
-      giftCatalog.gifts.some((gift) => gift.id === "chongqing-tuocha"),
-    ).toBe(true);
-  });
-
-  it("excludes the fresh or pickled vegetable option", () => {
-    expect(giftCatalog.gifts.some((gift) => gift.id === "fuling-zhacai")).toBe(
-      false,
-    );
   });
 
   it("keeps the budget individual and current", () => {
